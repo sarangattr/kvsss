@@ -1,0 +1,20 @@
+/* Top Search Bar Width */
+
+.navbar-custom .app-search{
+    max-width: 320px !important;
+}
+.navbar-custom{
+    background-color: #2196f3 !important;
+}
+.logo-box{
+    background-color: #2196f3 !important;
+}
+#top-search{
+    width: 270px;
+}
+.text-uppercase{
+    font-size: small;
+}
+.footer{
+    padding: 0 !important;
+}

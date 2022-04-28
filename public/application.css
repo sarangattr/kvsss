@@ -1,0 +1,17 @@
+label.required::after {
+    content: '*';
+    margin-left: 5px;
+    color: #ec6161;
+}
+label.error {
+    color: #ec6161;
+    font-weight: unset !important;
+}
+.mouse {
+    cursor: pointer;
+}
+
+table.dataTable tr th:last-child {
+    width: 1px;
+    text-align: center;
+}

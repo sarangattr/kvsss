@@ -1,0 +1,13 @@
+{
+    "Authentication": true,
+    "Application": true,
+    "Masters": true,
+    "Candidates": true,
+    "FileManager": true,
+    "Companies": true,
+    "Lead": true,
+    "Team": true,
+    "Recruitments": true,
+    "Staff": true,
+    "Resumes": true
+}
