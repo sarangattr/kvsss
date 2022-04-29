@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\Application\Helpers;
+use HTML;
 
 class DataTableHelpers {
 
@@ -61,14 +62,19 @@ class DataTableHelpers {
             </li>';
         if(!in_array('hide-edit', $types))
             $edit = '<li class="list-inline-item">
-                <a href="'.route($route . '.edit', [$id,null]) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
-            </li>';           
-        if(!in_array('hide-delete', $types))
-            $delete = '<li class="list-inline-item">
-                <a href="'.route($route .'.delete', $id) .'" class="delete-action-confirm action-icon mouse"> <i class="mdi mdi-delete"></i></a>
-            </li>';
+                    <a href="'.route($route . '.edit', [$id,null]) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
+                </li>';
+        $b = '<form method="DELETE" action="'.route($route . '.destroy', $id) .'">
+
+        <button type="submit">Del</button>
+        </form>';           
+        $a ='{{ Form::open(["route" => ["categories.destroy", $id], "method" => "delete"]) }}
+        {{ Form::submit("Delete") }}
+        {{ Form::close() }}';
+
+        //$c = '{!!'. HTML::linkRoute("account.destroy", "Logout", $id, ["data-method" => "DELETE"]) .'!!}';
         
-        return $view . $edit . $delete;
+        return $view . $edit;
 
     }
 }

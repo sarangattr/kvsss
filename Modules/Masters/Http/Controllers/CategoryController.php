@@ -25,6 +25,7 @@ class CategoryController extends Controller
     {
         $query = Category::query();
         $categories = $query->select('id','name','description','parent_category','status')
+            ->where('del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
         
@@ -52,7 +53,25 @@ class CategoryController extends Controller
                 return 'null';
             })
             ->editColumn('actions', function ($result) {
-                return DataTableHelpers::newActions($result->id, 'categories', ['hide-show']); 
+                $edit = '<li class="list-inline-item">
+                        <a href="'.route('categories.edit', $result -> id ) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
+                    </li>';
+                $delete = '<li class="list-inline-item">
+                        <div data-href="'.route('categories.destroy', crypt_encrypt($result -> id) ). '" class="delete-action-confirm action-icon mouse"> <i class="mdi mdi-delete"></i></div>
+                    </li>';
+                $parent = Category::where('parent_category', $result -> id )->select('id','name')->get();
+
+                $check = json_decode($parent, true);
+
+                if($check != null )
+                {
+                    $delete = '<li class="list-inline-item">
+                    <div data-href="'.route('categories.destroy', crypt_encrypt($result -> id) ). '" class="delete-action-confirm-category action-icon mouse"> <i class="mdi mdi-delete"></i></div>
+                </li>';
+                }
+
+                return $edit . $delete;
+                
             })
             ->rawColumns(['name', 'actions','parent_category', 'status', 'description'])
             ->make(true);
@@ -122,13 +141,14 @@ class CategoryController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $category = Category::where('id',crypt_decrypt($id))->first();
         $category -> name = $request -> name;
         $category -> description = $request->description;
         $category -> parent_category = $request -> parent_category;
         $category -> save();
+        flash(trans('application::actions.update-success'))->success();
         return redirect()->route('categories.index');
     }
 
@@ -139,6 +159,20 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return 'hello';
+        // $category = Category::where('id',crypt_decrypt($id))->first();
+        // $category -> del_status = 1;
+        // $category -> save();
+        //return crypt_decrypt($id);
+        $parent = Category::where('parent_category',crypt_decrypt($id))->select('id','name')->get();
+        $check = json_decode($parent, true);
+        
+        if($check != null )
+        {
+            return 1;
+        }
+        else{
+            return 0;
+        } 
+        return successResponse();
     }
 }

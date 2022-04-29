@@ -69,7 +69,7 @@
                 </table>
                 @if(! isset($hideCardLayout))
             </div>
-        </div>
+        </div> 
     </div>
 </div>
 @endif

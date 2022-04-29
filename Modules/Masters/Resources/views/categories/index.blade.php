@@ -48,9 +48,45 @@
     @endcomponent
 </x-masters::sideMenus>
 
+<x-application::modal id="action-confirm-modal-popup-category" title="Action confirm">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4>Are you sure want to delete this ?</h4>
+            <div>This Category Has Sub Categories. Deleting this means all the sub categories will be deleted </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <x-application::modalActions id="action-confirm-modal-popup-submit-category" buttonLayout="danger" label="Delete"/>
+        </div>
+    </div>
+</x-application::modal>
+
 
 @endsection
 
 @push('script')
+    <script>var dataTableReRender = ""; </script>
+    
+    <script>dataTableReRender = "category-table";</script>
+    
+    <script>
+        $(document).on('click', '.delete-action-confirm-category', function() {
+            let href = $(this).data('href');
+            $('#action-confirm-modal-popup-category').modal('show');
+            $('#action-confirm-modal-popup-submit-category').attr('request-href', href);
+        })
 
+        $(document).on('click', '#action-confirm-modal-popup-submit-category', function() {
+            appRequest($('#action-confirm-modal-popup-submit-category').attr('request-href'), '', 'DELETE')
+            .then(res => {
+                if(dataTableReRender)
+                    $('#' + dataTableReRender).DataTable().draw();
+                $('#action-confirm-modal-popup-category').modal('hide');
+                $('#action-confirm-modal-popup-submit-category').attr('request-href', "");
+                appNotification('success', 'Action status', 'Successfully deleted')
+            })
+
+        })
+    </script>
 @endpush

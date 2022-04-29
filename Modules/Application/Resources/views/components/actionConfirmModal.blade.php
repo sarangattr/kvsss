@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <x-application::modalActions id="action-confirm-modal-popup-submit" buttonLayout="{{isset($primaryButtonLayout) ? $primaryButtonLayout : 'primary'}}" label="{{$actionConfirmButtonlabel}}"/>
+            <x-application::modalActions id="action-confirm-modal-popup-submit" buttonLayout="{{isset($primaryButtonLayout) ? $primaryButtonLayout : 'primary' }}" label="{{$actionConfirmButtonlabel}}"/>
         </div>
     </div>
 </x-application::modal>
