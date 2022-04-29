@@ -17,7 +17,7 @@
         <x-application::formLabel name="parent_category" label="Parent Category"/>
         <select class="form-control" name="parent_category" id="parent_id">
             <option value="">- None -</option>
-            @include('masters::categories._categories-hirearchy', ['categories' => $categories, 'dashes'=> ''])
+            @include('masters::categories._categories-hirearchy', ['categories' => $categories, 'dashes'=> '','id' => isset($result->parent_category) ? $result->parent_category : null])
         </select>
         <x-application::validationError name="parent_category" />
     </div>

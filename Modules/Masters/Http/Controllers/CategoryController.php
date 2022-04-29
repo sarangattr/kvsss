@@ -124,7 +124,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::where('id',crypt_decrypt($id))->first();
+        $category -> name = $request -> name;
+        $category -> description = $request->description;
+        $category -> parent_category = $request -> parent_category;
+        $category -> save();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -134,6 +139,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'hello';
     }
 }

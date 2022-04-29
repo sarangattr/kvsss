@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function() {
             //category
             Route::resource('categories', 'CategoryController');
             Route::post('categories/datatable', 'CategoryController@datatable');
+            Route::delete('categories/delete', 'CategoryController@destroy')->name('categories.delete');
         });
     });
 });

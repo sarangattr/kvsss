@@ -65,7 +65,7 @@ class DataTableHelpers {
             </li>';           
         if(!in_array('hide-delete', $types))
             $delete = '<li class="list-inline-item">
-                <a href="'.route($route .'.destroy', $id) .'" class="action-icon mouse"> <i class="mdi mdi-delete"></i></a>
+                <a href="'.route($route .'.delete', $id) .'" class="delete-action-confirm action-icon mouse"> <i class="mdi mdi-delete"></i></a>
             </li>';
         
         return $view . $edit . $delete;
