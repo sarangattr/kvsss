@@ -11,9 +11,9 @@
             <div class="card-body">
                 <div class="inbox-leftbar">
                     <div class="d-grid">
-                        <button id="{{$actionButtonId}}" type="button" class="btn btn-danger waves-effect waves-light" data-bs-toggle="modal data-bs-target="#composemodal>
+                        <a href="{{$submitUrl}}" type="button" class="btn btn-danger waves-effect waves-light">
                             <i class="mdi mdi-plus-circle me-1"></i>Add {{isset($title) ? $title : ''}}
-                        </button>
+                        </a>
                     </div>
                     <div class="mail-list mt-4">
                         <a href="{{route('categories.index')}}" class="{{$title=='Category' ? $activeClass : ''}}" style="{{ $title=='Category' ? $activeStyle : '' }}">Categories</a>

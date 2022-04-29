@@ -17,16 +17,14 @@ class CategoryController extends Controller
      * @return Renderable
      */
     public function index()
-    {
-        $parent = Category::categoryDropDown();
-        //return $parent;
-        return view('masters::categories.index',compact('parent'));
+    {   
+        return view('masters::categories.index');
     }
 
     public function datatable(Request $request)
     {
         $query = Category::query();
-        $categories = $query->select('name','description','parent_category','status')
+        $categories = $query->select('id','name','description','parent_category','status')
             ->orderby('id','ASC')
             ->take($request->length);
         
@@ -48,8 +46,13 @@ class CategoryController extends Controller
                     return 'nil';
                 }
             })
-            ->editColumn('actions', function ($result) { 
-                return DataTableHelpers::actions($result->id, 'categories', ['hide-show']); 
+            ->editColumn('description', function ($result){
+                if($result->description)
+                    return $result->description;
+                return 'null';
+            })
+            ->editColumn('actions', function ($result) {
+                return DataTableHelpers::newActions($result->id, 'categories', ['hide-show']); 
             })
             ->rawColumns(['name', 'actions','parent_category', 'status', 'description'])
             ->make(true);
@@ -61,7 +64,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('masters::create');
+        $categories = Category::categoryDropDown();
+        return view('masters::categories.create',compact('categories'));   
     }
 
     /**
@@ -93,7 +97,23 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('masters::edit');
+        $category_id = $id;
+        $categories = Category::categoryDropDown();
+        
+        $a = Category::where('id', crypt_decrypt($id))
+        ->select('name','description','parent_category')
+        ->first();
+        $result = Category::where('id', crypt_decrypt($id))
+        ->select('name','description','parent_category')
+        ->first();
+        try{
+            $parent = Category::where('id',$a->parent_category)->select('name')->first();
+            $result['parent_name'] = $parent->name;
+        }catch(\Exception $e){
+            $error='true';
+        }
+
+        return view('masters::categories.edit',compact('categories','result','category_id'));
     }
 
     /**

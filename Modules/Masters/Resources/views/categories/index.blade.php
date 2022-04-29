@@ -47,34 +47,10 @@
     ])
     @endcomponent
 </x-masters::sideMenus>
-<x-application::modal id="category-modal" title="Category" actionButtonName="Submit" actionButtontype="submit">
-    <x-application::ajaxForm method="POST" action="categories.store" id="category-form" ajaxSubmit>
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <x-application::formLabel name="name" label="Name" required/>
-                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Category name', 'required', 'maximumLength' => 100, 'minimumLength' => 2]) !!}
-                <x-application::validationError name="name" />
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <x-application::formLabel name="description" label="Description"/>
-                {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Category Description']) !!}
-                <x-application::validationError name="description" />
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <x-application::formLabel name="parent_category" label="Parent Category"/>
-                <select class="form-control" name="parent_id">
-                    <option value="">- None -</option>
-                    @include('masters::categories._categories-hirearchy', ['categories' => $parent, 'dashes'=> '', 'id' => isset($result->parent_id) ? $result->parent_id : null])
-                </select>
-                <x-application::validationError name="parent_category" />
-            </div>
-        </div>
-        <x-application::modalActions type="submit" label="Submit"/>
-    </x-application::ajaxForm>
-</x-application::modal>
+
 
 @endsection
+
+@push('script')
+
+@endpush
