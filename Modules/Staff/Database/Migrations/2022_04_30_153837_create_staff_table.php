@@ -15,7 +15,9 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('user_type');
+            $table->date('date_of_join')->nullable();
             $table->boolean('status')->default(0);
             $table->boolean('del_status')->default(0);
             $table->timestamps();

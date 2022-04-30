@@ -30,7 +30,7 @@
                 'enctype' => ['multipart/form-data'],
                 'form' => 'staff::staff._form',                
                 'method' => 'PUT',                
-                'action' => ['staffs.update'],
+                'action' => ['staffs.update',$id],
                 'result' => $result,
                 'container' => '12',
                 'layout' => true,

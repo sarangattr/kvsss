@@ -55,4 +55,22 @@ class StaticData {
             
         return $data;
     }
+
+    public static function userTypes($id = "")
+    {
+        $data = [
+            1 => "Stockist",
+            2 => "Checkin/Checkout Staff",
+            3 => "Technician Supervisor",
+            4 => "Technician",
+            5 => "Directors",
+            6 => "Sub Distributor",
+            7 => "LCO",
+            8 => "Admin",
+        ];
+
+        if($id)
+            return $data[ $id ];
+        return $data;
+    }
 }
