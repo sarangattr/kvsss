@@ -33,6 +33,18 @@ class Category extends Model
         ])->get();
     }
 
+
+    public static function changeDelStatus($cat)
+    {
+        foreach($cat as $c){
+            $category = Category::where('id',$c->id)->update(['del_status' => 1]);
+        }
+        if(count($c-> children)){
+            $data = Category::changeDelStatus($c->children);
+        }
+        return 'success';
+    }
+
     
 
     public function children()

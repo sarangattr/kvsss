@@ -64,17 +64,14 @@ class DataTableHelpers {
             $edit = '<li class="list-inline-item">
                     <a href="'.route($route . '.edit', [$id,null]) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
                 </li>';
-        $b = '<form method="DELETE" action="'.route($route . '.destroy', $id) .'">
-
-        <button type="submit">Del</button>
-        </form>';           
-        $a ='{{ Form::open(["route" => ["categories.destroy", $id], "method" => "delete"]) }}
-        {{ Form::submit("Delete") }}
-        {{ Form::close() }}';
+        if (!in_array('hide-delete', $types))
+            $delete = '<li class="list-inline-item">
+                    <div data-href="'.route($route . '.destroy', $id). '" class="delete-action-confirm action-icon mouse"> <i class="mdi mdi-delete"></i></div>
+                </li>';
 
         //$c = '{!!'. HTML::linkRoute("account.destroy", "Logout", $id, ["data-method" => "DELETE"]) .'!!}';
         
-        return $view . $edit;
+        return $view . $edit . $delete;
 
     }
 }

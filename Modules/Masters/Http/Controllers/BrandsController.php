@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Application\Helpers\DataTableHelpers;
 use Modules\Masters\Entities\Brands;
+use Modules\Masters\Http\Requests\BrandRequest;
 use Yajra\DataTables\DataTables;
 
 class BrandsController extends Controller
@@ -24,6 +25,7 @@ class BrandsController extends Controller
     {
         $query = Brands::query();
         $result = $query->select('id','name','description','status')
+            ->where('del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
         
@@ -58,7 +60,7 @@ class BrandsController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
         $brand = Brands::create($request->all());
 
@@ -95,7 +97,7 @@ class BrandsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(BrandRequest $request, $id)
     {
         $brand = Brands::where('id',crypt_decrypt($id))->first();
         $brand -> name = $request -> name;
@@ -112,6 +114,8 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = crypt_decrypt($id);
+        $brand = Brands::where('id',$id)->update(['del_status' => 1]);
+        return successResponse();
     }
 }

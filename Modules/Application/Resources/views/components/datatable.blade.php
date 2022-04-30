@@ -1,5 +1,5 @@
 @php
-    $dataTableId = isset($id) ? rand() . '-' . $id : rand(); 
+    $dataTableId = isset($id) ? $id : rand(); 
     $url = isset($url) ? $url : '';
 @endphp
 

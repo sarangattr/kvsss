@@ -54,7 +54,7 @@ class CategoryController extends Controller
             })
             ->editColumn('actions', function ($result) {
                 $edit = '<li class="list-inline-item">
-                        <a href="'.route('categories.edit', $result -> id ) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
+                        <a href="'.route('categories.edit', crypt_encrypt($result -> id) ) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
                     </li>';
                 $delete = '<li class="list-inline-item">
                         <div data-href="'.route('categories.destroy', crypt_encrypt($result -> id) ). '" class="delete-action-confirm action-icon mouse"> <i class="mdi mdi-delete"></i></div>
@@ -159,20 +159,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        // $category = Category::where('id',crypt_decrypt($id))->first();
-        // $category -> del_status = 1;
-        // $category -> save();
-        //return crypt_decrypt($id);
-        $parent = Category::where('parent_category',crypt_decrypt($id))->select('id','name')->get();
-        $check = json_decode($parent, true);
-        
-        if($check != null )
-        {
-            return 1;
-        }
-        else{
-            return 0;
-        } 
+        $cat =  Category::where('id', '=', crypt_decrypt($id))->with([
+            'children' => function ($q) {
+                $q->select('id', 'parent_category', 'name');
+            }
+        ])->get();
+        $data = Category::changeDelStatus($cat);
         return successResponse();
     }
 }

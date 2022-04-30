@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
 <!-- end page title -->
 @endsection
 
