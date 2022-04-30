@@ -18,7 +18,9 @@
                     <div class="mail-list mt-4">
                         <a href="{{route('categories.index')}}" class="{{$title=='Category' ? $activeClass : ''}}" style="{{ $title=='Category' ? $activeStyle : '' }}">Categories</a>
                         <hr style="margin: 0;">
-                        <a href="{{route('brands.index')}}" class="{{$title=='Brands' ? $activeClass : ''}}" style="{{$title=='Brands' ? $activeStyle : ''}}">Brands</a>
+                        <a href="{{route('brands.index')}}" class="{{$title=='Brand' ? $activeClass : ''}}" style="{{$title=='Brand' ? $activeStyle : ''}}">Brands</a>
+                        <hr style="margin: 0;">
+                        <a href="{{route('tags.index')}}" class="{{$title=='Tag' ? $activeClass : ''}}" style="{{$title=='Tag' ? $activeStyle : ''}}">Tags</a>
                         <hr style="margin: 0;">
                     </div>
                 </div>

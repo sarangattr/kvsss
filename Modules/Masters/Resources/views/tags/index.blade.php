@@ -9,36 +9,36 @@
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
-                    <li class="breadcrumb-item active">Brands</li>
+                    <li class="breadcrumb-item active">Tags</li>
                 </ol>
             </div>
         </div>
     </div>
-</div>
+</div> 
 <!-- end page title -->
 @endsection
 
-@section('title','Brands')
+@section('title','Tags')
 
 @section('content')
 
 <x-masters::sideMenus
-    actionButtonId="brands"
-    title="Brand"
-    modalId="brand-modal"
-    submitUrl="{{route('brands.create')}}"
-    formId="brand-form"
+    actionButtonId="tags"
+    title="Tag"
+    modalId="tag-modal"
+    submitUrl="{{route('tags.create')}}"
+    formId="tag-form"
 >
     @component('application::components.datatable', [
-        'id' => 'brand-table',
+        'id' => 'tag-table',
         'hideCardLayout' => true,
         // 'actionButtons' => [
         //     ['name' => 'Add New', 'url' => url('/admin/masters/sector/create')],
         // ],
-        'url' => url('/admin/masters/brands/datatable'),
+        'url' => url('/admin/masters/tags/datatable'),
         'headers' => [
             ['label' => 'ID', 'width' => '50px', 'name' => 'DT_RowIndex', 'orderable' => false ,'searchable' => false ],
-            ['label' => 'Name', 'name' => 'name'],
+            ['label' => 'Tag', 'name' => 'tag'],
             ['label' => 'Description', 'name' => 'description', 'orderable' => false ,'searchable' => false],
             ['label' => 'Status', 'name' => 'status', 'orderable' => false ,'searchable' => false],
             ['label' => 'Actions', 'name' => 'actions','orderable' => false ,'searchable' => false],
@@ -48,8 +48,9 @@
 </x-masters::sideMenus>
 
 
+
 @endsection
 
 @push('script')
-
+   
 @endpush

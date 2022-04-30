@@ -9,5 +9,6 @@
     "Team": true,
     "Recruitments": true,
     "Staff": true,
-    "Resumes": true
+    "Resumes": true,
+    "User": true
 }

@@ -23,10 +23,11 @@ Route::prefix('admin')->group(function() {
             //brand
             Route::resource('brands', 'BrandsController');
             Route::post('brands/datatable', 'BrandsController@datatable');
-            
-            //Route::delete('categories/{id}', ['as' => 'categories.destroy', 'uses' => 'CategoryController@destroy']);
 
-            // Route::delete('categories/delete', 'CategoryController@destroy')->name('categories.delete');
+            //tags
+            Route::resource('tags','TagsController');
+            Route::post('tags/datatable','TagsController@datatable');
+            
         });
     });
 });

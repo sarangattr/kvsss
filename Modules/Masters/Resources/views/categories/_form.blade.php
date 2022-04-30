@@ -24,6 +24,10 @@
 </div>
 <div class="row mt-2">
     <div class="col-md-6">
+        @if($method == 'POST')
         <button class="btn btn-md btn-success" type="submit" >Create</button>
+        @else
+            <button class="btn btn-md btn-success" type="submit" >Update</button>
+        @endif
     </div>
 </div>
