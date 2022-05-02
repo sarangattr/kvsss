@@ -28,7 +28,7 @@ class StaffController extends Controller
     public function datatable(Request $request)
     {
         $query = Staff::query();
-        $result = $query->select('staff.id','staff.user_id','staff.user_type','staff.status','staff.date_of_join')
+        $result = $query->select('staff.id','staff.staff_id','staff.user_id','staff.user_type','staff.status','staff.date_of_join')
             ->join('users','staff.user_id','=','users.id')
             ->addSelect('users.name','users.email','users.mobile')
             ->where('staff.del_status',0)
@@ -43,11 +43,14 @@ class StaffController extends Controller
             ->editColumn('email', function ($result) {
                 return $result->email;
             })
+            ->editColumn('staff_id', function ($result) {
+                return $result->staff_id;
+            })
             ->editColumn('mobile', function ($result) {
                 return ucFirst($result->mobile);
             })
             ->editColumn('role', function ($result) {
-                return ucFirst($result->user_type);
+                return StaticData::userTypes( $result -> user_type );
             })
             ->editColumn('date_of_join', function ($result) {
                 return ucFirst($result->date_of_join);
@@ -55,7 +58,7 @@ class StaffController extends Controller
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'staffs', ['hide-show']); 
             })
-            ->rawColumns(['name', 'actions', 'status', 'email','mobile','date_of_join','role'])
+            ->rawColumns(['name', 'actions', 'status', 'email','mobile','date_of_join','role','staff_id'])
             ->make(true);
     }
 
@@ -85,6 +88,7 @@ class StaffController extends Controller
         $user -> password = Hash::make(Str::random(6));
         $user -> save();
         $staff -> user_id = $user -> id;
+        $staff -> staff_id = $request -> staff_id;
         $staff -> user_type = $request -> user_type;
         $staff -> date_of_join = $request -> date_of_join;
         $staff -> save();
@@ -110,7 +114,13 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        return view('staff::edit');
+        $result = Staff::where('staff.id',crypt_decrypt($id))->join('users','staff.user_id','=','users.id')
+            ->select('users.name','users.email','users.mobile','staff.user_type','staff.staff_id','staff.date_of_join')
+            ->first();
+
+        $usertype = StaticData::userTypes();
+
+        return view('staff::staff.edit',compact('result','id','usertype'));
     }
 
     /**
@@ -119,9 +129,28 @@ class StaffController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(StaffRequest $request, $id)
     {
-        //
+        $id = crypt_decrypt($id);
+        $staff_details = Staff::where('id',$id)
+            ->select('user_id')->first();
+        $user = User::where('id',$staff_details -> user_id )
+            ->update([
+                'name' => $request -> name,
+                'email' => $request -> email,
+                'mobile' => $request -> mobile,
+            ]);
+
+        $staff = Staff::where('staff.id',$id)
+            ->update([
+                'staff_id' => $request -> staff_id ,
+                'date_of_join' => $request -> date_of_join,
+                'user_type' => $request -> user_type,
+            ]);
+        
+
+        flash(trans('application::actions.create-success'))->success();
+        return redirect()->route('staffs.index');
     }
 
     /**
@@ -131,6 +160,9 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = crypt_decrypt($id);
+
+        $staff = Staff::where('id',$id)->update(['del_status' => 1]);
+        return successResponse();
     }
 }

@@ -17,6 +17,7 @@ class CreateStaffTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('user_type');
+            $table->string('staff_id',100);
             $table->date('date_of_join')->nullable();
             $table->boolean('status')->default(0);
             $table->boolean('del_status')->default(0);

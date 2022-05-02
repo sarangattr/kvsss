@@ -9,7 +9,10 @@
         <x-application::textBox label="Mobile" name="mobile" placeholder="9XXXXXXXXX" id="name" autofocus required/>
     </div>
 </div>
-<div class="row mt-2"> 
+<div class="row mt-2">
+    <div class="col-md-4">
+        <x-application::textBox label="Id" name="staff_id" placeholder="enter id" id="staff_id" autofocus required/>
+    </div> 
     <div class="col-md-3">
         <x-application::textBox label="Date of Join" type="date" name="date_of_join" placeholder="select date of joining" id="date_of_join" />
     </div>
