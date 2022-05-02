@@ -699,6 +699,7 @@
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script src="{{asset('assets/libs/jquery-toast-plugin/jquery.toast.min.js')}}"></script>
     <script src="{{asset('application.js')}}"></script>
+    <script src="{{ Module::asset('application:js/app.js') }}"></script>
     <script>
         $('#app-action-message .alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>

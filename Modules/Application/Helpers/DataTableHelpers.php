@@ -51,6 +51,7 @@ class DataTableHelpers {
         return $view . $edit . $delete;
 
     }
+
     public static function newActions($id, $route, $types = [])
     { 
         $view = $edit = $delete = "";
@@ -73,5 +74,20 @@ class DataTableHelpers {
         
         return $view . $edit . $delete;
 
+    }
+
+    public static function statusChanger( $id, $status, $url)
+    {
+        if($status == 0)
+        {
+            $label = 'Enable';
+            $color = 'danger';
+        }
+        elseif($status == 1)
+        {
+            $label = 'Disable';
+            $color = 'success';
+        }
+        return '<div class="btn btn-sm text-uppercase font-weight-bold change-active-inactive-status mouse btn-'.$color.'" data-id="'.$id.'" data-type="datatable" data-url="'.url($url).'">'.$label.'</div>'; 
     }
 }

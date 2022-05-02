@@ -43,7 +43,7 @@ function appNotification(type = 'info', title, message = "") {
     $.NotificationApp.send(title, message, 'top-right', '#1ea69a', type, 3000, 1, 'slide');
 }
 
-function appRequest(url, body = {}, method = 'GET') {
+function appRequest(url, body = {}, method = 'GET') { 
     return new Promise((resolve, reject) => {
         return $.ajax({
             url: url,
@@ -58,3 +58,4 @@ function appRequest(url, body = {}, method = 'GET') {
         })
     })
 }
+

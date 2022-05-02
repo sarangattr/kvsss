@@ -27,6 +27,11 @@ Route::prefix('admin')->group(function() {
             //tags
             Route::resource('tags','TagsController');
             Route::post('tags/datatable','TagsController@datatable');
+
+            //models
+            Route::resource('models','ModelController');
+            Route::post('models/datatable','ModelController@datatable');
+            Route::get('change-models-status','ModelController@changeStatus');
             
         });
     });

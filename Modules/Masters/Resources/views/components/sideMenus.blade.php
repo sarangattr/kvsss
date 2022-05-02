@@ -22,6 +22,8 @@
                         <hr style="margin: 0;">
                         <a href="{{route('tags.index')}}" class="{{$title=='Tag' ? $activeClass : ''}}" style="{{$title=='Tag' ? $activeStyle : ''}}">Tags</a>
                         <hr style="margin: 0;">
+                        <a href="{{route('models.index')}}" class="{{$title=='Model' ? $activeClass : ''}}" style="{{$title=='Model' ? $activeStyle : ''}}">Model</a>
+                        <hr style="margin: 0;">
                     </div>
                 </div>
                 <div class="inbox-rightbar">
