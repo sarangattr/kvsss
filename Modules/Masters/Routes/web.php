@@ -35,6 +35,16 @@ Route::prefix('admin')->group(function() {
             Route::resource('models','ModelController');
             Route::post('models/datatable','ModelController@datatable');
             Route::get('change-models-status','ModelController@changeStatus');
+
+            //stores
+            Route::resource('stores','StoreController');
+            Route::post('stores/datatable','StoreController@datatable');
+            Route::get('change-stores-status','StoreController@changeStatus');
+
+            //tray
+            Route::resource('trays','TrayController');
+            Route::post('trays/datatable','TrayController@datatable');
+            Route::get('change-trays-status','TrayController@changeStatus');
             
         });
     });

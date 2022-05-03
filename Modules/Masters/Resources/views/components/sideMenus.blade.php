@@ -24,6 +24,10 @@
                         <hr style="margin: 0;">
                         <a href="{{route('models.index')}}" class="{{$title=='Model' ? $activeClass : ''}}" style="{{$title=='Model' ? $activeStyle : ''}}">Model</a>
                         <hr style="margin: 0;">
+                        <a href="{{route('stores.index')}}" class="{{$title=='Store' ? $activeClass : ''}}" style="{{$title=='Store' ? $activeStyle : ''}}">Stores</a>
+                        <hr style="margin: 0;">
+                        <a href="{{route('trays.index')}}" class="{{$title=='Tray' ? $activeClass : ''}}" style="{{$title=='Tray' ? $activeStyle : ''}}">Trays</a>
+                        <hr style="margin: 0;">
                     </div>
                 </div>
                 <div class="inbox-rightbar">
