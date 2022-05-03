@@ -32,9 +32,9 @@
 
         <li class="menu-title  mt-2">clients</li>
         <li>
-            <a href="{{url('admin/companies')}}">
+            <a href="{{ route('set-top-box.index')}}">
                 <i class=" ri-building-4-line "></i>
-                <span>Companies</span> </a>
+                <span>Set Top Boxes</span> </a>
         </li>
         <li>
             <a href="{{url('admin/lead')}}">

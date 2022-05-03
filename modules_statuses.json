@@ -10,5 +10,6 @@
     "Recruitments": true,
     "Staff": true,
     "Resumes": true,
-    "User": true
+    "User": true,
+    "SetTopBox": true
 }

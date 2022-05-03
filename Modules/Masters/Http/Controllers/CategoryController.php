@@ -52,6 +52,9 @@ class CategoryController extends Controller
                     return $result->description;
                 return 'null';
             })
+            ->editColumn('status', function ($result) {
+                return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/masters/change-category-status' );
+            })
             ->editColumn('actions', function ($result) {
                 $edit = '<li class="list-inline-item">
                         <a href="'.route('categories.edit', crypt_encrypt($result -> id) ) .'" class="action-icon mouse "> <i class="mdi mdi-square-edit-outline"></i></a>
@@ -150,6 +153,19 @@ class CategoryController extends Controller
         $category -> save();
         flash(trans('application::actions.update-success'))->success();
         return redirect()->route('categories.index');
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = crypt_decrypt($request -> id);
+        $status = 0;
+        $model = Category::where('id',$id)->select('id','status')->first();
+        if($model -> status == 0 )
+            $status = 1;
+        $model -> status = $status;
+        $model -> save();
+        return successResponse('','Category status changed successfully');
+        
     }
 
     /**

@@ -39,6 +39,9 @@ class TagsController extends Controller
                     return $result->description;
                 return 'null';
             })
+            ->editColumn('status', function ($result) {
+                return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/masters/change-tags-status' );
+            })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'tags', ['hide-show']); 
             })
@@ -102,6 +105,19 @@ class TagsController extends Controller
         flash(trans('application::actions.update-success'))->success();
 
         return redirect()->route('tags.index');
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = crypt_decrypt($request -> id);
+        $status = 0;
+        $model = Tags::where('id',$id)->select('id','status')->first();
+        if($model -> status == 0 )
+            $status = 1;
+        $model -> status = $status;
+        $model -> save();
+        return successResponse('','Tag status changed successfully');
+        
     }
 
     /**

@@ -39,6 +39,9 @@ class BrandsController extends Controller
                     return $result->description;
                 return 'null';
             })
+            ->editColumn('status', function ($result) {
+                return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/masters/change-brands-status' );
+            })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'brands', ['hide-show']); 
             })
@@ -105,6 +108,19 @@ class BrandsController extends Controller
         $brand -> save();
         flash(trans('application::actions.update-success'))->success();
         return redirect()->route('brands.index');
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = crypt_decrypt($request -> id);
+        $status = 0;
+        $model = Brands::where('id',$id)->select('id','status')->first();
+        if($model -> status == 0 )
+            $status = 1;
+        $model -> status = $status;
+        $model -> save();
+        return successResponse('','Brand status changed successfully');
+        
     }
 
     /**

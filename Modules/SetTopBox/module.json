@@ -1,0 +1,13 @@
+{
+    "name": "SetTopBox",
+    "alias": "settopbox",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SetTopBox\\Providers\\SetTopBoxServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

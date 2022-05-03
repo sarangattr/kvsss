@@ -55,6 +55,9 @@ class StaffController extends Controller
             ->editColumn('date_of_join', function ($result) {
                 return ucFirst($result->date_of_join);
             })
+            ->editColumn('status', function ($result) {
+                return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/change-staff-status' );
+            })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'staffs', ['hide-show']); 
             })
@@ -151,6 +154,19 @@ class StaffController extends Controller
 
         flash(trans('application::actions.create-success'))->success();
         return redirect()->route('staffs.index');
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = crypt_decrypt($request -> id);
+        $status = 0;
+        $model = Staff::where('id',$id)->select('id','status')->first();
+        if($model -> status == 0 )
+            $status = 1;
+        $model -> status = $status;
+        $model -> save();
+        return successResponse('','Staff status changed successfully');
+        
     }
 
     /**
