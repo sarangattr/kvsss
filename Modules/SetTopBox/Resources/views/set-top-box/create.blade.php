@@ -9,7 +9,7 @@
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                    <li class="breadcrumb-item active">Staff</li>
+                    <li class="breadcrumb-item active">Set Top Box</li>
                 </ol>
             </div>
         </div>
@@ -18,19 +18,19 @@
 <!-- end page title -->
 @endsection
 
-@section('title','Staffs')
+@section('title','Set Top Box')
 
 @section('content')
 
 <div class="card">
-    <div class="card-header">New Staff</div>
+    <div class="card-header">New Set Top Box</div>
     <div class="card-body">
         <div class="container">
             @include('application::components.form', [
                 'enctype' => ['multipart/form-data'],
-                'form' => 'staff::staff._form',                
+                'form' => 'settopbox::set-top-box._form',                
                 'method' => 'POST',                
-                'action' => ['staffs.store'],
+                'action' => ['set-top-box.store'],
                 'result' => [],
                 'container' => '12',
                 'layout' => true,

@@ -31,7 +31,7 @@
         'headers' => [
             ['label' => 'ID', 'width' => '50px', 'name' => 'id', 'orderable' => false ],
             ['label' => 'Name of LCO/Sub Dis/Dis', 'name' => 'lco_name' , 'orderable' => false, 'searchable' => false], 
-            ['label' => 'LCO ID', 'name' => 'lco_id' , 'orderable' => false, 'searchable' => false],     
+            ['label' => 'LCO ID', 'name' => 'lco_code' , 'orderable' => false, 'searchable' => false],     
             ['label' => 'Serial No.', 'name' => 'serial_no'],
             ['label' => 'VC No.', 'name' => 'vc_no'], 
             ['label' => 'Assigned Date', 'name' => 'assign_date'],            

@@ -73,4 +73,38 @@ class StaticData {
             return $data[ $id ];
         return $data;
     }
+
+    public static function casDropdown($id = '')
+    {
+        $data = [
+            1 => 'CONAX'
+        ];
+
+        if($id)
+            return $data [ $id ];
+        return $data;
+    }
+
+    public static function stbTypeDropdown($id = '')
+    {
+        $data = [
+            1 => 'MPEG2-SD'
+        ];
+
+        if($id)
+            return $data [ $id ];
+        return $data;
+    }
+
+    public static function supplierDropdown($id = '')
+    {
+        $data = [
+            1 => 'SHENZHEN COSHIP ELECTRONICS CO LTD'
+        ];
+
+        if($id)
+            return $data [ $id ];
+        return $data;
+    }
+
 }

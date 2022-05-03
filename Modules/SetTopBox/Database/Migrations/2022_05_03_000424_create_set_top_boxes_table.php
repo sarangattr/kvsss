@@ -27,9 +27,9 @@ class CreateSetTopBoxesTable extends Migration
                 ->references('id')
                 ->on('models')
                 ->onDelete('cascade');
-            $table->string('cas',100);
-            $table->string('stb_type',100);
-            $table->string('supplier',255);
+            $table->unsignedBigInteger('cas');
+            $table->unsignedBigInteger('stb_type');
+            $table->unsignedBigInteger('supplier');
             $table->string('batch',100);
             $table->boolean('status')->default(0);
             $table->boolean('del_status')->default(0);
