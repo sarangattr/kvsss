@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Application\Services\AppServices;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class ApplicationController extends Controller
 {
@@ -128,5 +130,29 @@ class ApplicationController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
         $response = curl_exec($ch);
         dd($response);
+    }
+
+
+    public function resetOldPassword()
+    {
+        $result = User::where('id',authUserId())->select('name','email')->first();
+        return view('application::password.reset-password',compact('result'));
+    }
+
+    public function updateOldPassword(Request $request)
+    {
+        $user = User::where('id',authUserId())->select('name','email','password')->first();
+        $pass = $request->old_password;
+        $request -> validate([
+            'email' => ['required','max:200','email',Rule::unique('users')->ignore(authUserId(), "id")],
+            'old_password' => ['required',function ($attribute,  $pass, $fail) use ($user) {
+                if (!Hash::check($pass, $user->password)) {
+                    $fail('Your password was not updated, since the provided current password does not match old password.');
+                }
+            }],
+            'password' => ['required','min:6','string','different:old_password'],
+            'password_confirmation' => ['required','same:password'],
+        ]);
+        return $request;
     }
 }

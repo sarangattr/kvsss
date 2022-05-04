@@ -351,9 +351,13 @@
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="ri-lock-line"></i>
                                 <span>Lock Screen</span>
+                            </a> -->
+                            <a href="{{url('admin/reset-old-password')}}" class="dropdown-item notify-item">
+                                <i class="ri-lock-line"></i>
+                                <span>Change Password</span>
                             </a>
 
                             <div class="dropdown-divider"></div>

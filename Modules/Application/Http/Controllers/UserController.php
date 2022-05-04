@@ -76,7 +76,7 @@ class UserController extends Controller
                 return $result->created_at;
             })
             ->editColumn('status', function() {
-                return DataTableHelpers::getStatus(1,'');
+                return; //DataTableHelpers::getStatus(1,'');
             })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'users',['hide-show']);

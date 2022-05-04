@@ -5,17 +5,17 @@ use HTML;
 
 class DataTableHelpers {
 
-    public static function getStatus($status, $url)
-    {
-        $label = 'In-Active';
-        $color = 'danger';
-        if($status === 1) {
-            $label = 'Active';
-            $color = 'success';
-        }
+    // public static function getStatus($status, $url)
+    // {
+    //     $label = 'In-Active';
+    //     $color = 'danger';
+    //     if($status === 1) {
+    //         $label = 'Active';
+    //         $color = 'success';
+    //     }
 
-        return '<div data-href="'. $url .'" class="datatable-status-change-action badge badge-soft-'. $color .'">'. $label .'</div>';
-    }
+    //     return '<div data-href="'. $url .'" class="datatable-status-change-action badge badge-soft-'. $color .'">'. $label .'</div>';
+    // }
     public static function printColor($color)
     {
         return '<label style="text-shadow:1px 1px #000000; font-weight:bold; font-size:15px; color:'.$color.';">'.$color.'</label>';
@@ -88,6 +88,6 @@ class DataTableHelpers {
             $label = 'Disable';
             $color = 'success';
         }
-        return '<div class="btn btn-sm text-uppercase font-weight-bold change-active-inactive-status mouse btn-'.$color.'" data-id="'.$id.'" data-type="datatable" data-url="'.url($url).'">'.$label.'</div>'; 
+        return '<div class="btn font-weight-bold change-active-inactive-status mouse badge badge-soft-'.$color.'" data-id="'.$id.'" data-type="datatable" data-url="'.url($url).'">'.$label.'</div>'; 
     }
 }

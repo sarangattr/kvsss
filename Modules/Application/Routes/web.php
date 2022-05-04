@@ -23,7 +23,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/users/datatable', 'UserController@datatable');
 
         //roles crud
-        Route::resource('/roles','RolesController');
+        Route::resource('/roles','RolesController'); 
         Route::post('/roles/datatable','RolesController@datatable');
 
         //permissions crud
@@ -38,6 +38,9 @@ Route::prefix('admin')->group(function () {
         //firebase notification
         Route::post('/save-token', 'ApplicationController@saveToken')->name('save.token');
         Route::post('/send-notification', 'ApplicationController@sendNotification')->name('send.notification');
+
+        Route::get('/reset-old-password', 'ApplicationController@resetOldPassword')->name('reset.oldpassword');
+        Route::post('/update-old-password', 'ApplicationController@updateOldPassword')->name('update.old-password');
         
     });
 });
