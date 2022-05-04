@@ -37,7 +37,7 @@
                 <span>Set Top Boxes</span> </a>
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('items.index')}}">
             <i class=" ri-building-4-line "></i>
                 <span>Items</span> </a>
         </li>

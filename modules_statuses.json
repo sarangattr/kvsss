@@ -11,5 +11,6 @@
     "Staff": true,
     "Resumes": true,
     "User": true,
-    "SetTopBox": true
+    "SetTopBox": true,
+    "Items": true
 }
