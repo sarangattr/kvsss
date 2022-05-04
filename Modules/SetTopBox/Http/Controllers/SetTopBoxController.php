@@ -9,6 +9,7 @@ use Modules\Application\Helpers\DataTableHelpers;
 use Modules\Application\Services\StaticData;
 use Modules\Masters\Entities\Models;
 use Modules\SetTopBox\Entities\SetTopBox;
+use Modules\SetTopBox\Http\Requests\SettopboxRequest;
 use Modules\Staff\Entities\Staff;
 use Yajra\DataTables\DataTables;
 
@@ -75,7 +76,7 @@ class SetTopBoxController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(SettopboxRequest $request)
     {
         $request ['created_by'] = authUserId();
         $setTopBox = SetTopBox::create($request -> all());
@@ -130,7 +131,7 @@ class SetTopBoxController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(SettopboxRequest $request, $id)
     {
         $setTopBox = SetTopBox::where('id',crypt_decrypt($id))
             ->update([
