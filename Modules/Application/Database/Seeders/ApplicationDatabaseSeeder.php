@@ -27,6 +27,7 @@ class ApplicationDatabaseSeeder extends Seeder
 
             $this->initPermission();
             $this->initAdminUser();
+            $this->initRoles();
 
             $this->command->warn('All done :)');
         }
@@ -69,5 +70,16 @@ class ApplicationDatabaseSeeder extends Seeder
         $permissions = Permission::pluck('id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
+    }
+
+    public function initRoles()
+    {
+        $role = Role::create(['name' => 'Stockist']);
+        $role = Role::create(['name' => 'Checkin/Checkout Staff']);
+        $role = Role::create(['name' => 'Technician Supervisor']);
+        $role = Role::create(['name' => 'Technician']);
+        $role = Role::create(['name' => 'Directors']);
+        $role = Role::create(['name' => 'Sub Distributor']);
+        $role = Role::create(['name' => 'LCO']);
     }
 }

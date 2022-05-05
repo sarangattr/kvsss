@@ -12,6 +12,7 @@ use Modules\Staff\Http\Requests\StaffRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Modules\Application\Helpers\DataTableHelpers;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 class StaffController extends Controller
@@ -71,7 +72,9 @@ class StaffController extends Controller
      */
     public function create()
     {
-        $usertype = StaticData::userTypes();
+        //$usertype = StaticData::userTypes();
+        $usertype = Role::pluck('name','id')->toArray();
+
 
         return view('staff::staff.create',compact('usertype'));
     }
@@ -90,6 +93,7 @@ class StaffController extends Controller
         $user -> mobile = $request -> mobile;
         $user -> password = Hash::make(Str::random(6));
         $user -> save();
+        $user->assignRole($request->user_type);
         $staff -> user_id = $user -> id;
         $staff -> staff_id = $request -> staff_id;
         $staff -> user_type = $request -> user_type;

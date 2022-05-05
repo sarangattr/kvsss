@@ -44,6 +44,12 @@ function authUserId()
     }
 }
 
+function authRoleId()
+{
+    return Auth::user()->roles[0]->id;
+}
+
+
 function successResponse($result = "", $message = "success", $code = 200)
 {
     return response()->json([

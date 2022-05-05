@@ -20,7 +20,7 @@ class MastersDatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call("OthersTableSeeder");
-        $this->initMatserData();
+        //$this->initMatserData();
     }
     public function initMatserData()
     {

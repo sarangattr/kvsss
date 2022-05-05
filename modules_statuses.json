@@ -12,5 +12,6 @@
     "Resumes": true,
     "User": true,
     "SetTopBox": true,
-    "Items": true
+    "Items": true,
+    "Dashboard": true
 }
