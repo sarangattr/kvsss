@@ -29,10 +29,8 @@ class StaffController extends Controller
     public function datatable(Request $request)
     {
         $query = Staff::query();
-        $result = $query->select('staff.id','staff.staff_id','staff.user_id','staff.user_type','staff.status','staff.date_of_join')
-            ->join('users','staff.user_id','=','users.id')
-            ->addSelect('users.name','users.email','users.mobile')
-            ->where('staff.del_status',0)
+        $result = $query->select('id','lco_code','user_type','status','date_of_join','name','email','mobile')
+            ->where('staffs.del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
         
@@ -72,9 +70,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //$usertype = StaticData::userTypes();
         $usertype = Role::pluck('name','id')->toArray();
-
 
         return view('staff::staff.create',compact('usertype'));
     }
@@ -84,21 +80,18 @@ class StaffController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(StaffRequest $request)
+    public function store(Request $request)
     {
         $staff = new Staff();
-        $user = new User();
-        $user -> name = $request -> name;
-        $user -> email = $request -> email;
-        $user -> mobile = $request -> mobile;
-        $user -> password = Hash::make(Str::random(6));
-        $user -> save();
-        $user->assignRole($request->user_type);
-        $staff -> user_id = $user -> id;
-        $staff -> staff_id = $request -> staff_id;
+        $staff -> name = $request -> name;
+        $staff -> email = $request -> email;
+        $staff -> mobile = $request -> mobile;
+        $staff -> lco_code = $request -> lco_code;
         $staff -> user_type = $request -> user_type;
         $staff -> date_of_join = $request -> date_of_join;
+        $staff -> password = Hash::make(Str::random(6));
         $staff -> save();
+        $staff->assignRole($request->user_type);
 
         flash(trans('application::actions.create-success'))->success();
         return redirect()->route('staffs.index');
@@ -121,11 +114,11 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        $result = Staff::where('staff.id',crypt_decrypt($id))->join('users','staff.user_id','=','users.id')
-            ->select('users.name','users.email','users.mobile','staff.user_type','staff.staff_id','staff.date_of_join')
+        $result = Staff::where('id',crypt_decrypt($id))
+            ->select('name','email','mobile','user_type','lco_code','date_of_join')
             ->first();
 
-        $usertype = StaticData::userTypes();
+        $usertype = Role::pluck('name','id')->toArray();
 
         return view('staff::staff.edit',compact('result','id','usertype'));
     }
@@ -139,18 +132,13 @@ class StaffController extends Controller
     public function update(StaffRequest $request, $id)
     {
         $id = crypt_decrypt($id);
-        $staff_details = Staff::where('id',$id)
-            ->select('user_id')->first();
-        $user = User::where('id',$staff_details -> user_id )
+
+        $staff = Staff::where('id',$id)
             ->update([
                 'name' => $request -> name,
                 'email' => $request -> email,
                 'mobile' => $request -> mobile,
-            ]);
-
-        $staff = Staff::where('staff.id',$id)
-            ->update([
-                'staff_id' => $request -> staff_id ,
+                'lco_code' => $request -> staff_id ,
                 'date_of_join' => $request -> date_of_join,
                 'user_type' => $request -> user_type,
             ]);

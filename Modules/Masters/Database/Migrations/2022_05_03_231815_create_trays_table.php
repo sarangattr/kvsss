@@ -19,7 +19,7 @@ class CreateTraysTable extends Migration
             $table->unsignedBigInteger('tray_owner');
             $table->foreign('tray_owner')
                 ->references('id')
-                ->on('staff')
+                ->on('staffs')
                 ->onDelete('cascade');
             $table->boolean('status')->default(0);
             $table->boolean('del_status')->default(0);

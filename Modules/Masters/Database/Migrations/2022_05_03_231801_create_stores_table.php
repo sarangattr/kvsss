@@ -19,7 +19,7 @@ class CreateStoresTable extends Migration
             $table->unsignedBigInteger('store_owner');
             $table->foreign('store_owner')
                 ->references('id')
-                ->on('staff')
+                ->on('staffs')
                 ->onDelete('cascade');
             $table->boolean('status')->default(0);
             $table->boolean('del_status')->default(0);

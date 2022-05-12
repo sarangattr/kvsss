@@ -639,7 +639,7 @@
                     <p class="text-reset">Admin Head</p>
                 </div>
                     
-                        @include('layouts.side-menu')
+                    @include('layouts.side-menu')
                     
 
                 <div class="clearfix"></div>

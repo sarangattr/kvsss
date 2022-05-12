@@ -74,12 +74,13 @@ class ApplicationDatabaseSeeder extends Seeder
 
     public function initRoles()
     {
-        $role = Role::create(['name' => 'Stockist']);
-        $role = Role::create(['name' => 'Checkin/Checkout Staff']);
-        $role = Role::create(['name' => 'Technician Supervisor']);
-        $role = Role::create(['name' => 'Technician']);
-        $role = Role::create(['name' => 'Directors']);
-        $role = Role::create(['name' => 'Sub Distributor']);
-        $role = Role::create(['name' => 'LCO']);
+        $role = Role::create(['name' => 'Stockist' , 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'Checkin Staff' , 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'Checkout Staff' , 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'Technician Supervisor', 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'Technician', 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'Directors', 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'Sub Distributor', 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'LCO', 'guard_name' => 'staff' ]);
     }
 }

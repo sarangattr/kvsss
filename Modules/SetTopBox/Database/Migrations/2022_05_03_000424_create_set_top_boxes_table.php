@@ -18,7 +18,7 @@ class CreateSetTopBoxesTable extends Migration
             $table->unsignedBigInteger('lco_id');
             $table->foreign('lco_id')
                 ->references('id')
-                ->on('staff')
+                ->on('staffs')
                 ->onDelete('cascade');
             $table->string('serial_no',255);
             $table->string('vc_no',255);

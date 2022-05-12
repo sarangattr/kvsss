@@ -60,13 +60,14 @@ class StaticData {
     {
         $data = [
             1 => "Admin",
-            2 => "Stockist",
-            3 => "Checkin/Checkout Staff",
-            4 => "Technician Supervisor",
-            5 => "Technician",
-            6 => "Directors",
-            7 => "Sub Distributor",
-            8 => "LCO",
+            2 => "Stockist",    
+            3 => "Checkin Staff",
+            4 => "Checkout Staff",
+            5 => "Technician Supervisor",
+            6 => "Technician",
+            7 => "Directors",
+            8 => "Sub Distributor",
+            9 => "LCO",
         ];
 
         if($id)

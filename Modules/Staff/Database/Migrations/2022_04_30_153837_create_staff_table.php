@@ -13,15 +13,21 @@ class CreateStaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
+        Schema::create('staffs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->bigInteger('mobile')->nullable();
+            $table->string('password');
             $table->unsignedBigInteger('user_type');
-            $table->string('staff_id',100);
+            $table->string('lco_code',100);
             $table->date('date_of_join')->nullable();
             $table->boolean('status')->default(0);
             $table->boolean('del_status')->default(0);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +38,6 @@ class CreateStaffTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('staffs');
     }
 }

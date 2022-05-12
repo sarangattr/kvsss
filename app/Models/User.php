@@ -13,16 +13,18 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    protected $guard = "staff";
+
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var string[] 
      */
     protected $fillable = [
         'name',
         'email',
+        'mobile',
         'password',
-        'device_token',
     ];
 
     /**
