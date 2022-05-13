@@ -27,7 +27,10 @@ class SetTopBox extends Model
         'deact_date',
         'react_date',
         'create_date',
+        'subdistributor_code',
     ];
+
+    public $timestamps = false;
 
     protected $table = 'set_top_boxes';
     

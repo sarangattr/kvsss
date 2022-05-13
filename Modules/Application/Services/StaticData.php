@@ -78,18 +78,19 @@ class StaticData {
     public static function casDropdown($id = '')
     {
         $data = [
-            1 => 'CONAX'
+            'CONAX' => 'CONAX'
         ];
 
         if($id)
             return $data [ $id ];
+
         return $data;
     }
 
     public static function stbTypeDropdown($id = '')
     {
         $data = [
-            1 => 'MPEG2-SD'
+            'MPEG2-SD'   => 'MPEG2-SD'
         ];
 
         if($id)
@@ -100,7 +101,7 @@ class StaticData {
     public static function supplierDropdown($id = '')
     {
         $data = [
-            1 => 'SHENZHEN COSHIP ELECTRONICS CO LTD'
+            'SHENZHEN COSHIP ELECTRONICS CO LTD' => 'SHENZHEN COSHIP ELECTRONICS CO LTD'
         ];
 
         if($id)

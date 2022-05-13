@@ -44,6 +44,17 @@ function authUserId()
     }
 }
 
+function authUserName()
+{
+    try {
+        if ($user = authUser()) {
+            return $user->name;
+        }
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+}
+
 function authRoleId()
 {
     return Auth::user()->roles[0]->id;

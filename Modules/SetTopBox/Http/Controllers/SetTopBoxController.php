@@ -28,9 +28,8 @@ class SetTopBoxController extends Controller
     {
         $query = SetTopBox::query();
         $result = $query->select('set_top_boxes.id','set_top_boxes.status','set_top_boxes.serial_no','set_top_boxes.vc_no','set_top_boxes.assign_date')
-            ->join('staff','set_top_boxes.lco_id','=','staff.id')
-            ->join('users','staff.user_id','=','users.id')
-            ->addSelect('staff.staff_id as lco_code','users.name as lco_name')
+            ->join('staffs','set_top_boxes.lco_id','=','staffs.lco_code')
+            ->addSelect('staffs.lco_code','staffs.name as lco_name')
             ->where('set_top_boxes.del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
@@ -38,7 +37,7 @@ class SetTopBoxController extends Controller
         return DataTables::of($result)
            ->addIndexColumn()
             ->editColumn('status', function ($result) {
-                return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/change-set-top-box-status' );
+                return DataTableHelpers::statusChangerSTB( crypt_encrypt($result -> id), $result -> status, '/admin/change-set-top-box-status' );
             })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'set-top-box', ['hide-show']); 
@@ -53,22 +52,17 @@ class SetTopBoxController extends Controller
      */
     public function create()
     {
-        $lco = Staff::where('staff.del_status',0)->where('staff.status',1)
-            ->join('users','staff.user_id','=','users.id')
-            ->select('users.name as lco_name','staff.staff_id as lco_id','staff.id')
+        $lco = Staff::where('staffs.del_status',0)->where('staffs.status',1)
+            ->select('staffs.name','staffs.lco_code')
             ->get();
-        
-        foreach($lco as $staff)
-        {
-            $lco_dropdown[$staff->id] = $staff->lco_name .' '.$staff->lco_id;
-        }
 
         $casdropdown = StaticData::casDropdown();
         $stbdropdown = StaticData::stbTypeDropdown();
-        $modeldropdown = Models::where('status',1)->where('del_status',0)->pluck('name','id')->toArray();
+        $modeldropdown = Models::where('status',1)->where('del_status',0)->select('name')->get();
+
         $supplier = StaticData::supplierDropdown();
         
-        return view('settopbox::set-top-box.create',compact('lco_dropdown','casdropdown','modeldropdown','stbdropdown','supplier'));
+        return view('settopbox::set-top-box.create',compact('lco','casdropdown','modeldropdown','stbdropdown','supplier'));
     }
 
     /**
@@ -78,10 +72,24 @@ class SetTopBoxController extends Controller
      */
     public function store(SettopboxRequest $request)
     {
-        $request ['created_by'] = authUserId();
+        $request ['created_by'] = authUserName();
+
+        $lco_code = $request -> lco_id;
+        $strlen = strlen( $lco_code );
+        
+        if($strlen <= 3)
+        {
+            $subdiscode = null;
+        }
+        else{
+            $subdiscode = substr( $lco_code, 0, 4);
+        }
+
+        $request ['subdistributor_code'] = $subdiscode;
+
+        
         $setTopBox = SetTopBox::create($request -> all());
         
-
         flash(trans('application::actions.create-success'))->success();
         return redirect()->route('set-top-box.index');
     }
@@ -103,26 +111,20 @@ class SetTopBoxController extends Controller
      */
     public function edit($id)
     {
-        $lco = Staff::where('staff.del_status',0)->where('staff.status',1)
-            ->join('users','staff.user_id','=','users.id')
-            ->select('users.name as lco_name','staff.staff_id as lco_id','staff.id')
+        $lco = Staff::where('staffs.del_status',0)->where('staffs.status',1)
+            ->select('staffs.name','staffs.lco_code')
             ->get();
-        
-        foreach($lco as $staff)
-        {
-            $lco_dropdown[$staff->id] = $staff->lco_name .' '.$staff->lco_id;
-        }
 
         $casdropdown = StaticData::casDropdown();
         $stbdropdown = StaticData::stbTypeDropdown();
-        $modeldropdown = Models::where('status',1)->where('del_status',0)->pluck('name','id')->toArray();
+        $modeldropdown = Models::where('status',1)->where('del_status',0)->select('name')->get();
         $supplier = StaticData::supplierDropdown();
 
         $result = SetTopBox::where('id',crypt_decrypt($id))
             ->select('lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date')
             ->first();
         
-        return view('settopbox::set-top-box.edit',compact('lco_dropdown','casdropdown','modeldropdown','stbdropdown','supplier','result','id'));
+        return view('settopbox::set-top-box.edit',compact('lco','casdropdown','modeldropdown','stbdropdown','supplier','result','id'));
     }
 
     /**
@@ -133,6 +135,17 @@ class SetTopBoxController extends Controller
      */
     public function update(SettopboxRequest $request, $id)
     {
+        $lco_code = $request -> lco_id;
+        $strlen = strlen( $lco_code );
+        
+        if($strlen <= 3)
+        {
+            $subdiscode = null;
+        }
+        else{
+            $subdiscode = substr( $lco_code, 0, 4);
+        }
+
         $setTopBox = SetTopBox::where('id',crypt_decrypt($id))
             ->update([
                 'lco_id' => $request -> lco_id,
@@ -143,7 +156,8 @@ class SetTopBoxController extends Controller
                 'stb_type' => $request -> stb_type,
                 'supplier' => $request -> supplier,
                 'batch' => $request -> batch,
-                'assign_date' => $request -> assign_date
+                'assign_date' => $request -> assign_date,
+                'subdistributor_code' => $subdiscode,
             ]);
         
         flash(trans('application::actions.update-success'))->success();
@@ -153,14 +167,45 @@ class SetTopBoxController extends Controller
     public function changeStatus(Request $request)
     {
         $id = crypt_decrypt($request -> id);
-        $status = 0;
+        $status = 'Deactive';
         $model = SetTopBox::where('id',$id)->select('id','status')->first();
-        if($model -> status == 0 )
-            $status = 1;
+        if($model -> status == 'Deactive' )
+            $status = 'Active';
         $model -> status = $status;
         $model -> save();
         return successResponse('','Set Top Box status changed successfully');
         
+    }
+
+    public function getSubDis(Request $request)
+    {
+        //$lco_id = $request -> lco_id;
+
+        // $strlen = strlen($request -> lco_id);
+
+        // if($strlen <= 3)
+        // {
+        //     $subdiscode = $lco_id;
+        // }
+        // else{
+        //     $subdiscode = substr( $lco_id, 0, 4);
+        // }
+        
+        //$str = substr( $lco_id, 0, 4);
+        // $subDis = Staff::where('status',1)->where('del_status',0)->whereIn('lco_code','like',$str.'%')->get();
+        //return $subDis;
+
+        // $queryStr = [ $str ];
+
+        // $subDis = Staff::where('status',1)
+        //     ->where('del_status',0)
+        //     ->where(function ($query) use ($queryStr) {
+        //         foreach($queryStr as $q){
+        //             $query->orwhere('lco_code',$q);
+        //         }      
+        //     })
+        //     ->get();
+        // return $subDis;
     }
 
     /**

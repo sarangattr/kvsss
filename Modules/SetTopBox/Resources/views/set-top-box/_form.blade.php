@@ -4,7 +4,24 @@ Set Top Box Information
 </p>
 <div class="row">
     <div class="col-md-4">
-        <x-application::appSelectBox label="Name of LCO/Sub Dis/Dis" name="lco_id" :options="$lco_dropdown" placeholder="-select-" id="lco_id" autofocus required/>
+        <div class="form-group">
+            {!! Form::label('lco_id','Name of LCO' , ['class' => 'required form-label']) !!}
+            <select name = "lco_id" id="lco-id" class="form-control">
+                <option value="">-Select-</option>
+                @foreach($lco as $data)
+                    @if(isset($result -> lco_id))
+                        @if($result -> lco_id == $data -> lco_code )
+                            <option selected=true value = "{{ $data -> lco_code }}">{{ $data -> lco_code . $data -> name }}</option>
+                        @else
+                            <option value = "{{ $data -> lco_code }}">{{ $data -> lco_code . $data -> name }}</option>
+                        @endif
+                    @else
+                        <option value = "{{ $data -> lco_code }}">{{ $data -> lco_code . $data -> name }}</option>
+                    @endif
+                @endforeach
+            </select>
+            @if ($errors->has('lco_id')) <div class="text-danger">{{ $errors->first('lco_id') }}</div> @endif
+        </div>
     </div>
     <div class="col-md-4">
         <x-application::textBox label="Serial No." name="serial_no" placeholder="Serial No" class="number-only" required/>
@@ -18,7 +35,24 @@ Set Top Box Information
         <x-application::appSelectBox label="Conditional Access System" name="cas" :options="$casdropdown" placeholder="-select-" id="cas" autofocus required/>
     </div>
     <div class="col-md-4">
-        <x-application::appSelectBox label="Model" name="model" :options="$modeldropdown" placeholder="-select-" id="model_id" autofocus required/>
+        <div class="form-group">
+            {!! Form::label('model','Select Model' , ['class' => 'required form-label']) !!}
+            <select name = "model" id="model-id" class="form-control">
+                <option value="">-Select-</option>
+                @foreach($modeldropdown as $data)
+                    @if(isset($result -> model))
+                        @if($result -> model == $data -> name )
+                            <option selected=true >{{ $data -> name }}</option>
+                        @else
+                            <option>{{ $data -> name }}</option>
+                        @endif
+                    @else
+                        <option>{{ $data -> name }}</option>
+                    @endif
+                @endforeach
+            </select>
+            @if ($errors->has('model')) <div class="text-danger">{{ $errors->first('model') }}</div> @endif
+        </div>
     </div>
     <div class="col-md-4">
         <x-application::appSelectBox label="STB Type" name="stb_type" :options="$stbdropdown" placeholder="-select-" id="stb_type" autofocus required/>
@@ -55,8 +89,8 @@ Set Top Box Information
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js" ></script>
     <script>
-       $('#lco_id').select2({
-            placeholder: 'select LCO/SubDis/Dis',
+       $('#lco-id').select2({
+            placeholder: 'select LCO/Sub Dis/Dis',
             multiple: false,
             class: 'form-control',
        })
@@ -65,7 +99,7 @@ Set Top Box Information
             multiple: false,
             class: 'form-control',
        })
-       $('#model_id').select2({
+       $('#model-id').select2({
             placeholder: 'select STB Model',
             multiple: false,
             class: 'form-control',
@@ -75,5 +109,18 @@ Set Top Box Information
             multiple: false,
             class: 'form-control',
        })
+    </script>
+    <script>
+        // $(document).on('change','#lco-id', function () {
+        //     let lcoId = $(this).val();
+        //     appRequest(script_url + '/admin/get-sub-dis', { lco_id: lcoId }, 'GET')
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(er => {
+        //         let { error, message } = er;
+        //         console.log(er);
+        //     })
+        // })
     </script>
 @endpush

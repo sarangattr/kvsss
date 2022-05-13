@@ -17,25 +17,35 @@ class StaffRequest extends FormRequest
     {
         $id = $this->segment(3) != NULL ? crypt_decrypt($this->segment(3)) : 0;
 
-        try{
+        // try{
 
-            $staff = Staff::where('staff.id',$id)
-                ->join('users','staff.user_id','users.id')
-                ->select('users.id as u_id')
-                ->first();
+        //     $staff = Staff::where('staff.id',$id)
+        //         ->join('users','staff.user_id','users.id')
+        //         ->select('users.id as u_id')
+        //         ->first();
 
-        }catch(\Exception $e){
+        // }catch(\Exception $e){
             
-        }
-        $u_id = isset($staff) ?  $staff -> u_id : 0;
+        // }
+        // $u_id = isset($staff) ?  $staff -> u_id : 0;
+        // return
+        //     [
+        //         'name' => 'required|max:100|min:2',
+        //         'email' => ['required','max:200','email',Rule::unique('users')->ignore($u_id, "id")],
+        //         'mobile' => ['required','digits:10',Rule::unique('users')->ignore($u_id, "id")],
+        //         'staff_id' => ['required','max:100',Rule::unique('staff')->ignore($id, "id")],
+        //         'user_type'=>'required',
+        // ];
+
         return
             [
                 'name' => 'required|max:100|min:2',
-                'email' => ['required','max:200','email',Rule::unique('users')->ignore($u_id, "id")],
-                'mobile' => ['required','digits:10',Rule::unique('users')->ignore($u_id, "id")],
-                'staff_id' => ['required','max:100',Rule::unique('staff')->ignore($id, "id")],
+                'email' => ['required','max:200','email',Rule::unique('staffs')->ignore($id, "id")],
+                'mobile' => ['required','digits:10',Rule::unique('staffs')->ignore($id, "id")],
+                'lco_code' => ['required','max:100',Rule::unique('staffs')->ignore($id, "id")],
                 'user_type'=>'required',
         ];
+
     }
 
     /**

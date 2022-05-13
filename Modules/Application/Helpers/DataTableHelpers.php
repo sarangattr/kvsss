@@ -90,4 +90,19 @@ class DataTableHelpers {
         }
         return '<div class="btn font-weight-bold change-active-inactive-status mouse badge badge-soft-'.$color.'" data-id="'.$id.'" data-type="datatable" data-url="'.url($url).'">'.$label.'</div>'; 
     }
+
+    public static function statusChangerSTB( $id, $status, $url)
+    {
+        if($status == 'Deactive')
+        {
+            $label = 'Deactive';
+            $color = 'danger';
+        }
+        elseif($status == 'Active')
+        {
+            $label = 'Active';
+            $color = 'success';
+        }
+        return '<div class="btn font-weight-bold change-active-inactive-status mouse badge badge-soft-'.$color.'" data-id="'.$id.'" data-type="datatable" data-url="'.url($url).'">'.$label.'</div>'; 
+    }
 }

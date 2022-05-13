@@ -16,5 +16,6 @@ Route::prefix('admin')->group(function() {
         Route::resource('set-top-box', 'SetTopBoxController');
         Route::post('set-top-box/datatable', 'SetTopBoxController@datatable');
         Route::get('change-set-top-box-status', 'SetTopBoxController@changeStatus');
+        Route::get('get-sub-dis', 'SetTopBoxController@getSubDis');
     });
 });

@@ -43,7 +43,7 @@ class StaffController extends Controller
                 return $result->email;
             })
             ->editColumn('staff_id', function ($result) {
-                return $result->staff_id;
+                return $result->lco_code;
             })
             ->editColumn('mobile', function ($result) {
                 return ucFirst($result->mobile);
@@ -80,7 +80,7 @@ class StaffController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(StaffRequest $request)
     {
         $staff = new Staff();
         $staff -> name = $request -> name;
@@ -138,7 +138,7 @@ class StaffController extends Controller
                 'name' => $request -> name,
                 'email' => $request -> email,
                 'mobile' => $request -> mobile,
-                'lco_code' => $request -> staff_id ,
+                'lco_code' => $request -> lco_code ,
                 'date_of_join' => $request -> date_of_join,
                 'user_type' => $request -> user_type,
             ]);

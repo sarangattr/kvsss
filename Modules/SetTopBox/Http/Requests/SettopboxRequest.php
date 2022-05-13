@@ -15,13 +15,13 @@ class SettopboxRequest extends FormRequest
     {
         return [
             'lco_id' => 'required',
-            'serial_no' => 'required|numeric|max:255',
-            'vc_no' => 'required|numeric|max:255',
+            'serial_no' => 'required|numeric|digits_between:1,20',
+            'vc_no' => 'required|numeric|digits_between:1,20',
             'model' => 'required',
             'cas' => 'required',
             'stb_type' => 'required',
             'supplier' => 'required',
-            'batch' => 'required|max:100',
+            'batch' => 'required|max:10',
             'assign_date' => 'date',
         ];
     }

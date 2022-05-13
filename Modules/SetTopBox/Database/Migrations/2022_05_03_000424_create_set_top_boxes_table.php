@@ -15,35 +15,23 @@ class CreateSetTopBoxesTable extends Migration
     {
         Schema::create('set_top_boxes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lco_id');
-            $table->foreign('lco_id')
-                ->references('id')
-                ->on('staffs')
-                ->onDelete('cascade');
-            $table->string('serial_no',255);
-            $table->string('vc_no',255);
-            $table->unsignedBigInteger('model');
-            $table->foreign('model')
-                ->references('id')
-                ->on('models')
-                ->onDelete('cascade');
-            $table->unsignedBigInteger('cas');
-            $table->unsignedBigInteger('stb_type');
-            $table->unsignedBigInteger('supplier');
-            $table->string('batch',100);
-            $table->boolean('status')->default(0);
+            $table->string('lco_id',20);
+            $table->string('serial_no',20);
+            $table->string('vc_no',20);
+            $table->string('model',20);
+            $table->string('cas',20);
+            $table->string('stb_type',100);
+            $table->string('supplier',200);
+            $table->string('batch',10);
+            $table->string('status',14)->default('Deactive');
             $table->boolean('del_status')->default(0);
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->string('created_by',150);
             $table->date('assign_date')->nullable();
             $table->date('activ_date')->nullable();
             $table->date('deact_date')->nullable();
             $table->date('react_date')->nullable();
             $table->date('create_date')->nullable();
-            $table->timestamps();
+            $table->string('subdistributor_code',4)->nullable();
         });
     }
 
