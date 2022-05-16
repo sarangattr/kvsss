@@ -110,17 +110,4 @@ Set Top Box Information
             class: 'form-control',
        })
     </script>
-    <script>
-        // $(document).on('change','#lco-id', function () {
-        //     let lcoId = $(this).val();
-        //     appRequest(script_url + '/admin/get-sub-dis', { lco_id: lcoId }, 'GET')
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(er => {
-        //         let { error, message } = er;
-        //         console.log(er);
-        //     })
-        // })
-    </script>
 @endpush
