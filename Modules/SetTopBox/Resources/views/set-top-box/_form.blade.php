@@ -4,24 +4,7 @@ Set Top Box Information
 </p>
 <div class="row">
     <div class="col-md-4">
-        <div class="form-group">
-            {!! Form::label('lco_id','Name of LCO' , ['class' => 'required form-label']) !!}
-            <select name = "lco_id" id="lco-id" class="form-control">
-                <option value="">-Select-</option>
-                @foreach($lco as $data)
-                    @if(isset($result -> lco_id))
-                        @if($result -> lco_id == $data -> lco_code )
-                            <option selected=true value = "{{ $data -> lco_code }}">{{ $data -> lco_code . $data -> name }}</option>
-                        @else
-                            <option value = "{{ $data -> lco_code }}">{{ $data -> lco_code . $data -> name }}</option>
-                        @endif
-                    @else
-                        <option value = "{{ $data -> lco_code }}">{{ $data -> lco_code . $data -> name }}</option>
-                    @endif
-                @endforeach
-            </select>
-            @if ($errors->has('lco_id')) <div class="text-danger">{{ $errors->first('lco_id') }}</div> @endif
-        </div>
+        <x-application::textBox label="Lco code" name="lco_code" placeholder="enter lco id" id="lco_id" autofocus required/>
     </div>
     <div class="col-md-4">
         <x-application::textBox label="Serial No." name="serial_no" placeholder="Serial No" class="number-only" required/>

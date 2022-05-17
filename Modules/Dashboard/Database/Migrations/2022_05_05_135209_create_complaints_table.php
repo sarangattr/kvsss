@@ -15,7 +15,7 @@ class CreateComplaintsTable extends Migration
     {
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lco_id');
+            $table->string('lco_code',20);
             $table->unsignedBigInteger('stb_id');
             $table->string('stb_serial');
             $table->string('stb_type');

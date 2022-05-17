@@ -93,6 +93,8 @@ class DataTableHelpers {
 
     public static function statusChangerSTB( $id, $status, $url)
     {
+        $color='';
+        $label='';
         if($status == 'Deactive')
         {
             $label = 'Deactive';

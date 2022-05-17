@@ -2,6 +2,7 @@
 
 namespace Modules\SetTopBox\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -27,22 +28,19 @@ class SetTopBoxController extends Controller
     public function datatable(Request $request)
     {
         $query = SetTopBox::query();
-        $result = $query->select('set_top_boxes.id','set_top_boxes.status','set_top_boxes.serial_no','set_top_boxes.vc_no','set_top_boxes.assign_date')
-            ->join('staffs','set_top_boxes.lco_id','=','staffs.lco_code')
-            ->addSelect('staffs.lco_code','staffs.name as lco_name')
-            ->where('set_top_boxes.del_status',0)
+        $result = $query->select('id','lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status','activ_date','deact_date','react_date','create_date','subdistributor_code')
+            ->where('del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
         
         return DataTables::of($result)
-           ->addIndexColumn()
             ->editColumn('status', function ($result) {
                 return DataTableHelpers::statusChangerSTB( crypt_encrypt($result -> id), $result -> status, '/admin/change-set-top-box-status' );
             })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'set-top-box', ['hide-show']); 
             })
-            ->rawColumns(['name', 'actions', 'status', 'email','mobile','date_of_join','role','staff_id'])
+            ->rawColumns([ 'actions', 'status'])
             ->make(true);
     }
 
@@ -172,6 +170,7 @@ class SetTopBoxController extends Controller
         if($model -> status == 'Deactive' )
             $status = 'Active';
         $model -> status = $status;
+        $model -> activ_date = Carbon::now()->format('Y-m-d H:i:s');
         $model -> save();
         return successResponse('','Set Top Box status changed successfully');
         

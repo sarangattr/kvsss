@@ -26,9 +26,8 @@ class TrayController extends Controller
     {
         $query = Tray::query();
         $result = $query->select('trays.name','trays.id','trays.status')
-            ->join('staff','trays.tray_owner','=','staff.id')
-            ->join('users','staff.user_id','=','users.id')
-            ->addSelect('staff.staff_id as lco_code','users.name as lco_name')
+            ->join('staffs','trays.tray_owner','=','staffs.id')
+            ->addSelect('staffs.lco_code','staffs.name as lco_name')
             ->where('trays.del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
@@ -54,12 +53,11 @@ class TrayController extends Controller
      */
     public function create()
     {
-        $lco = Staff::where('staff.del_status',0)->where('staff.status',1)
-            ->whereIn('staff.user_type',[1,2,3,4])
-            ->join('users','staff.user_id','=','users.id')
-            ->select('users.name as lco_name','staff.staff_id as lco_id','staff.id')
+        $lco = Staff::where('staffs.del_status',0)->where('staffs.status',1)
+            ->whereIn('staffs.user_type',[2,3,4,5])
+            ->select('staffs.name as lco_name','staffs.lco_code as lco_id','staffs.id')
             ->get();
-        
+        $owners = [];
         foreach($lco as $staff)
         {
             $owners[$staff->id] = $staff->lco_name .' '.$staff->lco_id;
@@ -98,12 +96,11 @@ class TrayController extends Controller
      */
     public function edit($id)
     {
-        $lco = Staff::where('staff.del_status',0)->where('staff.status',1)
-            ->whereIn('staff.user_type',[1,2,3,4])
-            ->join('users','staff.user_id','=','users.id')
-            ->select('users.name as lco_name','staff.staff_id as lco_id','staff.id')
+        $lco = Staff::where('staffs.del_status',0)->where('staffs.status',1)
+            ->whereIn('staffs.user_type',[1,2,3,4])
+            ->select('staffs.name as lco_name','staffs.lco_code as lco_id','staffs.id')
             ->get();
-        
+        $owners=[];
         foreach($lco as $staff)
         {
             $owners[$staff->id] = $staff->lco_name .' '.$staff->lco_id;

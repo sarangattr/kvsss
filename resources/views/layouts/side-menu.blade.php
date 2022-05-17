@@ -75,7 +75,7 @@
                 <span>Resumes</span> </a>
         </li> -->
 
-        <li class="menu-title  mt-2">accounts</li>
+        <!-- <li class="menu-title  mt-2">accounts</li>
 
         <li>
             <a href="ecommerce-orders.html" >
@@ -86,7 +86,7 @@
             <a href="ecommerce-orders.html">
                 <i class=" ri-layout-line "></i>
                 <span>Receipts</span> </a>
-        </li>
+        </li> -->
 
         <li class="menu-title  mt-2">management</li>
 

@@ -78,7 +78,10 @@ class StaticData {
     public static function casDropdown($id = '')
     {
         $data = [
-            'CONAX' => 'CONAX'
+            'CONAX' => 'CONAX',
+            'LogicEastern' => 'LogicEastern',
+            'NAGRA' => 'NAGRA',
+            'Gospell' => 'Gospell'
         ];
 
         if($id)
@@ -90,7 +93,13 @@ class StaticData {
     public static function stbTypeDropdown($id = '')
     {
         $data = [
-            'MPEG2-SD'   => 'MPEG2-SD'
+            'MPEG2-SD'   => 'MPEG2-SD',
+            'HD' => 'HD',
+            'MPEG4-SD' => 'MPEG4-SD',
+            'MPEG4 - SD CARDLESS' => 'MPEG4 - SD CARDLESS',
+            'MPEG2 - SD  CARDLESS' => 'MPEG2 - SD  CARDLESS',
+            'HD CARDLESS' => 'HD CARDLESS',
+            
         ];
 
         if($id)
@@ -101,7 +110,12 @@ class StaticData {
     public static function supplierDropdown($id = '')
     {
         $data = [
-            'SHENZHEN COSHIP ELECTRONICS CO LTD' => 'SHENZHEN COSHIP ELECTRONICS CO LTD'
+            'SHENZHEN COSHIP ELECTRONICS CO LTD' => 'SHENZHEN COSHIP ELECTRONICS CO LTD',
+            'MY BOX TECHNOLOGIES PVT LTD' => 'MY BOX TECHNOLOGIES PVT LTD',
+            'LOGIC EASTERN INDIA PVT LTD' => 'LOGIC EASTERN INDIA PVT LTD',
+            'NULL' => 'NULL',
+            'SICHUAN CHANGHONG NETWORK' => 'SICHUAN CHANGHONG NETWORK',
+            'GOSPELL' => 'GOSPELL',
         ];
 
         if($id)

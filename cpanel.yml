@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home2/kvscattr/public_html/
-    - /bin/cp -R * $DEPLOYPATH

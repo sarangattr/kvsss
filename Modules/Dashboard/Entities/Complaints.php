@@ -10,7 +10,7 @@ class Complaints extends Model
     use HasFactory;
 
     protected $fillable = [
-        'lco_id',
+        'lco_code',
         'stb_id',
         'stb_serial',
         'stb_type',
