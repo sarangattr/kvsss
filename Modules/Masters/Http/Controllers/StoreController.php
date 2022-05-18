@@ -55,7 +55,7 @@ class StoreController extends Controller
     public function create()
     {
         $lco = Staff::where('staffs.del_status',0)->where('staffs.status',1)
-            ->whereIn('staffs.user_type',[2,3,4,5])
+            ->whereIn('staffs.user_type',[2,3,4,5,6])
             ->select('staffs.name as lco_name','staffs.lco_code as lco_id','staffs.id')
             ->get();
         
@@ -98,9 +98,9 @@ class StoreController extends Controller
      * @return Renderable
      */
     public function edit($id)
-    {
+    { 
         $lco = Staff::where('staffs.del_status',0)->where('staffs.status',1)
-            ->whereIn('staffs.user_type',[1,2,3,4])
+            ->whereIn('staffs.user_type',[2,3,4,5,6])
             ->select('staffs.name as lco_name','staffs.lco_code as lco_id','staffs.id')
             ->get();
         $owners = [];

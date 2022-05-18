@@ -23,6 +23,7 @@ class SettopboxRequest extends FormRequest
             'supplier' => 'required',
             'batch' => 'required|max:10',
             'assign_date' => 'date',
+            'stb_status' => 'required',
         ];
     }
 

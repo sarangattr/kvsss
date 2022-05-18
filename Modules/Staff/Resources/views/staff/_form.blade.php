@@ -11,7 +11,7 @@
 </div>
 <div class="row mt-2">
     <div class="col-md-4">
-        <x-application::textBox label="Id" name="lco_code" placeholder="enter id" id="staff_id" autofocus required/>
+        <x-application::textBox label="LCO CODE" name="lco_code" placeholder="enter id" id="staff_id" autofocus required/>
     </div> 
     <div class="col-md-3">
         <x-application::textBox label="Date of Join" type="date" name="date_of_join" placeholder="select date of joining" id="date_of_join" />

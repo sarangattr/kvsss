@@ -71,6 +71,9 @@ class SetTopBoxController extends Controller
     public function store(SettopboxRequest $request)
     {
         $request ['created_by'] = authUserName();
+        $request ['status'] = $request -> stb_status;
+        unset($request ['stb_status']);
+        $request['create_date'] = Carbon::now()->format('Y-m-d H:i:s');
 
         $lco_code = $request -> lco_id;
         $strlen = strlen( $lco_code );
@@ -119,7 +122,7 @@ class SetTopBoxController extends Controller
         $supplier = StaticData::supplierDropdown();
 
         $result = SetTopBox::where('id',crypt_decrypt($id))
-            ->select('lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date')
+            ->select('lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status as stb_status')
             ->first();
         
         return view('settopbox::set-top-box.edit',compact('lco','casdropdown','modeldropdown','stbdropdown','supplier','result','id'));
@@ -135,6 +138,7 @@ class SetTopBoxController extends Controller
     {
         $lco_code = $request -> lco_id;
         $strlen = strlen( $lco_code );
+        
         
         if($strlen <= 3)
         {
@@ -156,6 +160,7 @@ class SetTopBoxController extends Controller
                 'batch' => $request -> batch,
                 'assign_date' => $request -> assign_date,
                 'subdistributor_code' => $subdiscode,
+                'status' => $request -> stb_status,
             ]);
         
         flash(trans('application::actions.update-success'))->success();

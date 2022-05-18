@@ -4,7 +4,7 @@ Set Top Box Information
 </p>
 <div class="row">
     <div class="col-md-4">
-        <x-application::textBox label="Lco code" name="lco_code" placeholder="enter lco id" id="lco_id" autofocus required/>
+        <x-application::textBox label="Lco code" name="lco_id" placeholder="enter lco id" id="lco_id" autofocus required/>
     </div>
     <div class="col-md-4">
         <x-application::textBox label="Serial No." name="serial_no" placeholder="Serial No" class="number-only" required/>
@@ -14,10 +14,10 @@ Set Top Box Information
     </div>
 </div>
 <div class="row mt-2">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <x-application::appSelectBox label="Conditional Access System" name="cas" :options="$casdropdown" placeholder="-select-" id="cas" autofocus required/>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             {!! Form::label('model','Select Model' , ['class' => 'required form-label']) !!}
             <select name = "model" id="model-id" class="form-control">
@@ -37,22 +37,28 @@ Set Top Box Information
             @if ($errors->has('model')) <div class="text-danger">{{ $errors->first('model') }}</div> @endif
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <x-application::appSelectBox label="STB Type" name="stb_type" :options="$stbdropdown" placeholder="-select-" id="stb_type" autofocus required/>
+    </div>
+    <div class="col-md-3">
+        <x-application::appSelectBox label="Status" name="stb_status" :options="['Active'=>'Active','Deactive'=>'Deactive']" placeholder="select" required/>
     </div>
 </div> 
 <div class="row mt-2">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <x-application::appSelectBox label="Supplier" name="supplier" :options="$supplier" placeholder="select" id="supplier" autofocus required/> 
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <x-application::textBox label="Batch No" name="batch" placeholder="Enter Batch Number" required/>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <x-application::appDatePicker label="Assigned Date" name="assign_date" placeholder="select assigned date" id="assigndate" required/>
     </div>
+    
 </div>
-<div class="row mt-2"></div>
+<div class="row mt-2">
+    
+</div>
 
 <div class="mt-4">
     <div class="float-end">

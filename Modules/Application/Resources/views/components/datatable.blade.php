@@ -108,6 +108,7 @@
                 iDisplayLength: 10,
                 serverSide: true,
                 processing: true,
+                pageLength: 10,
                 "language": { 
                     "processing": "Please wait..."
                 },
