@@ -122,7 +122,7 @@ class SetTopBoxController extends Controller
         $supplier = StaticData::supplierDropdown();
 
         $result = SetTopBox::where('id',crypt_decrypt($id))
-            ->select('lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status as stb_status')
+            ->select('lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status as stb_status','activ_date','deact_date','react_date','create_date')
             ->first();
         
         return view('settopbox::set-top-box.edit',compact('lco','casdropdown','modeldropdown','stbdropdown','supplier','result','id'));
@@ -161,6 +161,10 @@ class SetTopBoxController extends Controller
                 'assign_date' => $request -> assign_date,
                 'subdistributor_code' => $subdiscode,
                 'status' => $request -> stb_status,
+                'activ_date' => $request -> activ_date,
+                'deact_date' => $request -> deact_date,
+                'react_date' => $request -> react_date,
+                'create_date' => $request -> create_date,
             ]);
         
         flash(trans('application::actions.update-success'))->success();
@@ -175,7 +179,7 @@ class SetTopBoxController extends Controller
         if($model -> status == 'Deactive' )
             $status = 'Active';
         $model -> status = $status;
-        $model -> activ_date = Carbon::now()->format('Y-m-d H:i:s');
+        $model -> activ_date = Carbon::now()->format('Y-m-d');
         $model -> save();
         return successResponse('','Set Top Box status changed successfully');
         

@@ -24,6 +24,10 @@ class SettopboxRequest extends FormRequest
             'batch' => 'required|max:10',
             'assign_date' => 'date',
             'stb_status' => 'required',
+            'activ_date' => 'date',
+            'deact_date' => 'date',
+            'react_date' => 'date',
+            'create_date' => 'date',
         ];
     }
 

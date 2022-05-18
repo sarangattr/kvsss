@@ -49,7 +49,7 @@ Set Top Box Information
         <x-application::appSelectBox label="Supplier" name="supplier" :options="$supplier" placeholder="select" id="supplier" autofocus required/> 
     </div>
     <div class="col-md-4">
-        <x-application::textBox label="Batch No" name="batch" placeholder="Enter Batch Number" required/>
+        <x-application::textBox label="Batch" name="batch" placeholder="Enter Batch Number" required/>
     </div>
     <div class="col-md-4">
         <x-application::appDatePicker label="Assigned Date" name="assign_date" placeholder="select assigned date" id="assigndate" required/>
@@ -57,7 +57,18 @@ Set Top Box Information
     
 </div>
 <div class="row mt-2">
-    
+    <div class="col-md-3">
+        <x-application::appDatePicker label="Activated Date" name="activ_date" placeholder="select activated date"  />
+    </div>
+    <div class="col-md-3">
+        <x-application::appDatePicker label="Deactivated Date" name="deact_date" placeholder="select deactivated date"  />
+    </div>
+    <div class="col-md-3">
+        <x-application::appDatePicker label="Reactivated Date" name="react_date" placeholder="select reactivated date"  />
+    </div>
+    <div class="col-md-3">
+        <x-application::appDatePicker label="Created Date" name="create_date" placeholder="select created date"  />
+    </div>
 </div>
 
 <div class="mt-4">
