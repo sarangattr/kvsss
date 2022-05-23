@@ -23,12 +23,12 @@ Route::prefix('admin')->group(function () {
         Route::post('/users/datatable', 'UserController@datatable');
 
         //roles crud
-        Route::resource('/roles','RolesController'); 
-        Route::post('/roles/datatable','RolesController@datatable');
+        // Route::resource('/roles','RolesController'); 
+        // Route::post('/roles/datatable','RolesController@datatable');
 
         //permissions crud
-        Route::resource('/permissions','PermissionsController');
-        Route::post('/permissions/datatable','PermissionsController@datatable');
+        // Route::resource('/permissions','PermissionsController');
+        // Route::post('/permissions/datatable','PermissionsController@datatable');
 
         //
         Route::get('/forgot-password', 'ApplicationController@forgotPassword');

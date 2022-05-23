@@ -102,11 +102,11 @@
                 <i class=" ri-pages-line "></i>
                 <span>Masters</span> </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="{{url('admin/roles')}}">
                 <i class="ri-pencil-ruler-2-line"></i>
                 <span>Roles</span> </a>
-        </li>
+        </li> -->
         <!-- <li>
             <a href="tables-datatables.html">
                 <i class=" ri-stack-line"></i>
