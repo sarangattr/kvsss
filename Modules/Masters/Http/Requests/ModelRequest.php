@@ -16,6 +16,7 @@ class ModelRequest extends FormRequest
         return [
             'name' => 'required|max:100',
             'model_id' => 'required|max:100',
+            'brand_id' => 'required',
         ];
     }
 

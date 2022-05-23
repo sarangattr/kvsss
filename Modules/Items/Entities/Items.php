@@ -10,16 +10,17 @@ class Items extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'serial_no',
-        'company',
-        'location'
+        'use',
+        'number',
+        'location_no',
+        'model_no',
+        'komment',
     ];
 
-    protected $table = 'items';
+    protected $table = 'item_master';
 
     protected $casts = [
-        'location' => 'array'
+        'location_no' => 'array',
     ];
     
     protected static function newFactory()

@@ -14,10 +14,10 @@ class ItemsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'location' => 'array',
-            'company' => 'required|max:100',
-            'serial_no' => 'max:255'
+            'use' => 'required|max:191',
+            'number' => 'nullable',
+            'location_no' => 'array',
+            'model_no' => 'required',
         ];
     }
 

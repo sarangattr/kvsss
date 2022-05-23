@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Application\Helpers\DataTableHelpers;
+use Modules\Masters\Entities\Brands;
 use Modules\Masters\Entities\Models;
 use Modules\Masters\Http\Requests\ModelRequest;
 use Yajra\DataTables\DataTables;
@@ -24,7 +25,7 @@ class ModelController extends Controller
     public function datatable(Request $request)
     {
         $query = Models::query();
-        $result = $query->select('id','name','model_id','status')
+        $result = $query->select('id','name','model_id','brand_id','status')
             ->where('del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
@@ -36,6 +37,9 @@ class ModelController extends Controller
             })
             ->editColumn('model_id', function ($result){
                 return $result->model_id;
+            })
+            ->editColumn('brand_id', function ($result){
+                return $result->brand_id;
             })
             ->editColumn('status', function ($result) {
                 return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/masters/change-models-status' );
@@ -53,7 +57,8 @@ class ModelController extends Controller
      */
     public function create()
     {
-        return view('masters::models.create');
+        $brands = Brands::where('del_status',0)->where('status',1)->pluck('name','id')->toArray();
+        return view('masters::models.create',compact('brands'));
     }
 
     /**
@@ -66,6 +71,7 @@ class ModelController extends Controller
         $model = new Models();
         $model -> name = $request -> name;
         $model -> model_id = $request -> model_id;
+        $model -> brand_id = $request -> brand_id;
         $model -> save();
 
         flash(trans('application::actions.create-success'))->success();
@@ -89,9 +95,9 @@ class ModelController extends Controller
      */
     public function edit($id)
     {
-        $result = Models::where('id',crypt_decrypt($id))->select('name','model_id','status')->first();
-
-        return view('masters::models.edit',compact('result','id'));
+        $result = Models::where('id',crypt_decrypt($id))->select('name','model_id','brand_id','status')->first();
+        $brands = Brands::where('del_status',0)->where('status',1)->pluck('name','id')->toArray();
+        return view('masters::models.edit',compact('result','id','brands'));
     }
 
     /**
@@ -102,7 +108,7 @@ class ModelController extends Controller
      */
     public function update(ModelRequest $request, $id)
     {
-        $model =  Models::where('id',crypt_decrypt($id))->update(['name' => $request->name,'model_id' => $request -> model_id]);
+        $model =  Models::where('id',crypt_decrypt($id))->update(['name' => $request->name,'model_id' => $request -> model_id,'brand_id' => $request -> brand_id]);
 
         flash(trans('application::actions.update-success'))->success();
         return redirect()->route('models.index');

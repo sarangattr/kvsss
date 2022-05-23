@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Application\Helpers\DataTableHelpers;
 use Modules\Items\Entities\Items;
 use Modules\Items\Http\Requests\ItemsRequest;
+use Modules\Masters\Entities\Models;
 use Yajra\DataTables\DataTables;
 
 class ItemsController extends Controller
@@ -24,28 +25,25 @@ class ItemsController extends Controller
     public function datatable(Request $request)
     {
         $query = Items::query();
-        $result = $query->select('id','name','serial_no','company','location','status')
-            ->where('del_status',0)
+        $result = $query->select('id','use','number','model_no','location_no')
             ->orderby('id','ASC')
             ->take($request->length);
         
         return DataTables::of($result)
-           ->addIndexColumn()
-            ->editColumn('name', function ($result) {
-                return ucFirst($result->name);
-            })
-            ->editColumn('location', function ($result) {
-                if($result->location)
-                    return $result->location;
+            ->addIndexColumn()
+            ->editColumn('location_no', function ($result) {
+                if($result->location_no)
+                    return  $result->location_no;
                 'none';
             })
-            ->editColumn('status', function ($result) {
-                return DataTableHelpers::statusChanger( crypt_encrypt($result -> id), $result -> status, '/admin/change-items-status' );
+            ->editColumn('model_no', function ($result) {
+                $model = Models::where('id',$result -> model_no)->select('name')->first()->name;
+                return $model;
             })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'items', ['hide-show']); 
             })
-            ->rawColumns(['name', 'actions', 'status','location'])
+            ->rawColumns(['location_no', 'model_no','actions','location'])
             ->make(true);
     }
 
@@ -55,7 +53,8 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        return view('items::items.create');
+        $models = Models::where('status',1)->pluck('name','id')->toArray();
+        return view('items::items.create',compact('models'));
     }
 
     /**
@@ -65,6 +64,7 @@ class ItemsController extends Controller
      */
     public function store(ItemsRequest $request)
     {
+        //return $request;
         $item = Items::create($request->all());
 
         flash(trans('application::actions.create-success'))->success();
@@ -88,9 +88,10 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        $result = Items::where('id',crypt_decrypt($id))->select('name','company','location','serial_no')->first();
+        $models = Models::where('status',1)->pluck('name','id')->toArray();
+        $result = Items::where('id',crypt_decrypt($id))->select('use','number','location_no','model_no','komment')->first();
 
-        return view('items::items.edit',compact('id','result'));
+        return view('items::items.edit',compact('id','result','models'));
     }
 
     /**
@@ -103,10 +104,11 @@ class ItemsController extends Controller
     {
         $item = Items::where('id',crypt_decrypt($id))
             ->update([
-                'name' => $request->name,
-                'serial_no' => $request -> serial_no,
-                'location' => $request -> location,
-                'company' => $request -> company,
+                'use' => $request->use,
+                'model_no' => $request -> model_no,
+                'location_no' => $request -> location_no,
+                'number' => $request -> number,
+                'komment' => $request -> komment
             ]);
         
         flash(trans('application::actions.update-success'))->success();

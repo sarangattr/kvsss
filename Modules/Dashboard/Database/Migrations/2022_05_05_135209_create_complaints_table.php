@@ -30,9 +30,11 @@ class CreateComplaintsTable extends Migration
             $table->timestamp('lco_to_sub_time')->nullable();
             $table->string('lco_to_sub_status',1)->default('N');
             $table->timestamp('sub_to_checkin_time')->nullable();
-            $table->string('sub_to_checkin__status',1)->default('N');
+            $table->string('sub_to_checkin_status',1)->default('N');
             $table->timestamp('checkin_to_tech_time')->nullable();
             $table->string('checkin_to_tech_status',1)->default('N');
+            $table->unsignedBigInteger('checkin_to_tech_id')->nullable();
+            $table->unsignedBigInteger('checkin_to_tech_tray')->nullable();
             $table->timestamp('tech_to_sup_time')->nullable();
             $table->string('tech_to_sup_status',1)->default('N');
             $table->unsignedBigInteger('actual_complaint');

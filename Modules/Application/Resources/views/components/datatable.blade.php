@@ -109,6 +109,9 @@
                 serverSide: true,
                 processing: true,
                 pageLength: 10,
+                autoWidth       : true,
+                responsive      : true,
+                paging          : true,
                 "language": { 
                     "processing": "Please wait..."
                 },

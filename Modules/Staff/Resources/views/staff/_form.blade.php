@@ -1,12 +1,15 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <x-application::textBox label="Name" name="name" placeholder="Name" id="name" autofocus required/>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <x-application::textBox label="Email" name="email" placeholder="Email" id="email" autofocus required/>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <x-application::textBox label="Mobile" name="mobile" placeholder="9XXXXXXXXX" id="name" autofocus required/>
+    </div>
+    <div class="col-md-3">
+        <x-application::passwordBox label="Password" type="password" class="form-control" name="password" placeholder="enter password" id="password" autofocus required/>
     </div>
 </div>
 <div class="row mt-2">
@@ -30,3 +33,4 @@
         @endif
     </div>
 </div>
+

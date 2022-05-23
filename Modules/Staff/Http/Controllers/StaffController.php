@@ -89,7 +89,7 @@ class StaffController extends Controller
         $staff -> lco_code = $request -> lco_code;
         $staff -> user_type = $request -> user_type;
         $staff -> date_of_join = $request -> date_of_join;
-        $staff -> password = Hash::make(Str::random(6));
+        $staff -> password = Hash::make($request -> password);
         $staff -> save();
         $staff->assignRole($request->user_type);
 
@@ -141,6 +141,7 @@ class StaffController extends Controller
                 'lco_code' => $request -> lco_code ,
                 'date_of_join' => $request -> date_of_join,
                 'user_type' => $request -> user_type,
+                'password' => Hash::make($request -> password),
             ]);
         
 

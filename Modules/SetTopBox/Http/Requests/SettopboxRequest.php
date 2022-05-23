@@ -22,12 +22,12 @@ class SettopboxRequest extends FormRequest
             'stb_type' => 'required',
             'supplier' => 'required',
             'batch' => 'required|max:10',
-            'assign_date' => 'date',
+            'assign_date' => 'date|nullable',
             'stb_status' => 'required',
-            'activ_date' => 'date',
-            'deact_date' => 'date',
-            'react_date' => 'date',
-            'create_date' => 'date',
+            'activ_date' => 'date|nullable',
+            'deact_date' => 'date|nullable',
+            'react_date' => 'date|nullable',
+            'create_date' => 'date|nullable',
         ];
     }
 

@@ -29,6 +29,8 @@ class Complaints extends Model
         'sub_to_checkin_status',
         'checkin_to_tech_time',
         'checkin_to_tech_status',
+        'checkin_to_tech_id',
+        'checkin_to_tech_tray',
         'tech_to_sup_time',
         'tech_to_sup_status',
         'actual_complaint',

@@ -30,11 +30,10 @@
         'url' => url('/admin/items/datatable'),
         'headers' => [
             ['label' => 'ID', 'width' => '50px', 'name' => 'id', 'orderable' => false ],
-            ['label' => 'Name', 'name' => 'name' , 'orderable' => false, 'searchable' => false],     
-            ['label' => 'Serial No', 'name' => 'serial_no'],
-            ['label' => 'Company', 'name' => 'company'],   
-            ['label' => 'Location', 'name' => 'location', 'orderable' => false, 'searchable' => false],           
-            ['label' => 'Status', 'name' => 'status', 'orderable' => false, 'searchable' => false],                
+            ['label' => 'Use', 'name' => 'use' , 'orderable' => false, 'searchable' => false],     
+            ['label' => 'Number', 'name' => 'number'],
+            ['label' => 'Model', 'name' => 'model_no'],   
+            ['label' => 'Location', 'name' => 'location_no', 'orderable' => false, 'searchable' => false],           
             ['label' => 'Actions', 'name' => 'actions', 'orderable' => false, 'searchable' => false],
             
         ]

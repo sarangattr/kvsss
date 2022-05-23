@@ -40,6 +40,7 @@
             ['label' => 'ID', 'width' => '50px', 'name' => 'DT_RowIndex', 'orderable' => false ,'searchable' => false ],
             ['label' => 'Name', 'name' => 'name'],
             ['label' => 'Model Id', 'name' => 'model_id'],
+            ['label' => 'Brand Id', 'name' => 'brand_id'],
             ['label' => 'Status', 'name' => 'status', 'orderable' => false ,'searchable' => false],
             ['label' => 'Actions', 'name' => 'actions','orderable' => false ,'searchable' => false],
         ]

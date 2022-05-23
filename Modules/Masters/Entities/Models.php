@@ -9,7 +9,7 @@ class Models extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','model_id'];
+    protected $fillable = ['name','model_id','brand_id'];
 
     protected $table = 'models';
     
