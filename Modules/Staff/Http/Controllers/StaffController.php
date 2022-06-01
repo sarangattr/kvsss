@@ -70,7 +70,8 @@ class StaffController extends Controller
      */
     public function create()
     {
-        $usertype = Role::where('id','!=',1)->pluck('name','id')->toArray();
+        // $usertype = Role::where('id','!=',1)->pluck('name','id')->toArray();
+        $usertype = StaticData::userTypes();
 
         return view('staff::staff.create',compact('usertype'));
     }
@@ -91,7 +92,7 @@ class StaffController extends Controller
         $staff -> date_of_join = $request -> date_of_join;
         $staff -> password = Hash::make($request -> password);
         $staff -> save();
-        $staff->assignRole($request->user_type);
+        // $staff->assignRole($request->user_type);
 
         flash(trans('application::actions.create-success'))->success();
         return redirect()->route('staffs.index');
@@ -118,7 +119,8 @@ class StaffController extends Controller
             ->select('name','email','mobile','user_type','lco_code','date_of_join')
             ->first();
 
-        $usertype = Role::where('id','!=',1)->pluck('name','id')->toArray();
+        // $usertype = Role::where('id','!=',1)->pluck('name','id')->toArray();
+        $usertype = StaticData::userTypes();
 
         return view('staff::staff.edit',compact('result','id','usertype'));
     }

@@ -82,5 +82,6 @@ class ApplicationDatabaseSeeder extends Seeder
         $role = Role::create(['name' => 'Directors', 'guard_name' => 'staff' ]);
         $role = Role::create(['name' => 'Sub Distributor', 'guard_name' => 'staff' ]);
         $role = Role::create(['name' => 'LCO', 'guard_name' => 'staff' ]);
+        $role = Role::create(['name' => 'QC', 'guard_name' => 'staff' ]);
     }
 }

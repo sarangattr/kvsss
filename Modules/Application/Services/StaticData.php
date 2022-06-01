@@ -59,7 +59,6 @@ class StaticData {
     public static function userTypes($id = "")
     {
         $data = [
-            1 => "Admin",
             2 => "Stockist",    
             3 => "Checkin Staff",
             4 => "Checkout Staff",
@@ -68,6 +67,7 @@ class StaticData {
             7 => "Directors",
             8 => "Sub Distributor",
             9 => "LCO",
+            10 => "QC"
         ];
 
         if($id)

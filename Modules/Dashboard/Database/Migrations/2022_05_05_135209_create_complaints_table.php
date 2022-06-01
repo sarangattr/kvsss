@@ -42,10 +42,10 @@ class CreateComplaintsTable extends Migration
             $table->string('flashed')->nullable();
             $table->string('status',1);
 
-            $table->timestamp('tech_to_checkout_time')->nullable();
-            $table->string('tech_to_checkout_status',1)->default('N');
-            $table->unsignedBigInteger('tech_to_checkout_id')->nullable();
-            $table->unsignedBigInteger('tech_to_checkout_tray_id')->nullable();
+            // $table->timestamp('tech_to_checkout_time')->nullable();
+            // $table->string('tech_to_checkout_status',1)->default('N');
+            // $table->unsignedBigInteger('tech_to_checkout_id')->nullable();
+            // $table->unsignedBigInteger('tech_to_checkout_tray_id')->nullable();
 
             $table->timestamp('sup_to_checkout_time')->nullable();
             $table->string('sup_to_checkout_status',1)->default('N');
