@@ -3,11 +3,19 @@
         <x-application::textBox label="Cluster Name" name="name" placeholder="Name" id="name" autofocus required/>
     </div>
     <div class="col-md-4">
-        <label class="form-label" >Cluster Lead Sub Distributor</label>
+        <label class="form-label required" >Cluster Lead Sub Distributor</label>
         <select name="lead_id" class="form-control" id="lead-id">
             <option value="" >-Select Lead-</option>
             @foreach($lead as $data)
-            <option value="{{ $data -> id }}">{{ $data -> lco_code }} {{ $data -> name }}</option>
+                @if(isset($result -> id))
+                    @if($result -> lead_id != $data -> id)
+                    <option value="{{ $data -> id }}">{{ $data -> lco_code }} {{ $data -> name }}</option>
+                    @else
+                    <option selected value="{{ $data -> id }}">{{ $data -> lco_code }} {{ $data -> name }}</option>
+                    @endif
+                @else
+                    <option value="{{ $data -> id }}">{{ $data -> lco_code }} {{ $data -> name }}</option>
+                @endif
             @endforeach
         </select>
         @if ($errors->has('lead_id')) <div class="text-danger">{{ $errors->first('lead_id') }}</div> @endif
@@ -16,9 +24,13 @@
 
 <div class="row mt-2">
     <div class="col-md-8">
-        <label class="form-label" >Enter Members Lco Id </label>
-        <select name="members[]" class="form-control" id="members">
-            
+        <label class="form-label required" >Enter Members Lco Id </label>
+        <select name="members[]" class="form-control" id="members" multiple>
+            @if(isset($result -> id))
+                @foreach($members as $data)
+                <option selected="true" value="{{ $data -> lco_code }}">{{ $data -> lco_code }}</option>
+                @endforeach
+            @endif
         </select>
         @if ($errors->has('members')) <div class="text-danger">{{ $errors->first('members') }}</div> @endif
     </div>
@@ -45,6 +57,7 @@
         $(document).ready(function(){
             $('#lead_id').val('');
         })
+
 
        $('#members').select2({
             placeholder: 'select LCO',

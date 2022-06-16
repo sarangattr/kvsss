@@ -19,19 +19,19 @@
 <!-- end page title -->
 @endsection
 
-@section('title','Staffs')
+@section('title','Edit Cluster')
 
 @section('content')
 
 <div class="card">
-    <div class="card-header">New Staff</div>
+    <div class="card-header">Edit Cluster</div>
     <div class="card-body">
         <div class="container">
             @include('application::components.form', [
                 'enctype' => ['multipart/form-data'],
-                'form' => 'staff::staff._form',                
+                'form' => 'groups::groups.form',                
                 'method' => 'PUT',                
-                'action' => ['staffs.update',$id],
+                'action' => ['clusters.update',$id],
                 'result' => $result,
                 'container' => '12',
                 'layout' => true,

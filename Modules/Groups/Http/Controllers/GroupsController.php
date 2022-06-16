@@ -113,7 +113,16 @@ class GroupsController extends Controller
      */
     public function edit($id)
     {
-        return view('groups::edit');
+        $lead = Staff::where('del_status',0)->where('user_type',8)->select('name','lco_code','id')->get();
+        $result = Groups::where('id',crypt_decrypt($id))->select('id','name','lead_id')->first();
+        $members = GroupMembers::where('group_id',crypt_decrypt($id))->select('lco_code')->get();
+        $str = '';
+        foreach($members as $data)
+        {
+            $str = $str .'<option selected value="'.$data -> lco_code.'">'.$data -> lco_code.'</option>';
+        }
+
+        return view('groups::groups.edit',compact('result','id','lead','members','str'));
     }
 
     /**
@@ -122,9 +131,24 @@ class GroupsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(GroupRequest $request, $id)
     {
-        //
+        $group = Groups::where('id',crypt_decrypt($id))->update([
+            'name' => $request -> name,
+            'lead_id' => $request -> lead_id
+        ]);
+        $mem = GroupMembers::where('group_id',crypt_decrypt($id))->delete();
+        $members = $request -> members;
+        foreach($members as $data)
+        {
+            $mem = GroupMembers::create([
+                'group_id' => crypt_decrypt($id),
+                'lco_code' => $data,
+            ]);
+        }
+
+        flash(trans('application::actions.update-success'))->success();
+        return redirect()->route('clusters.index');
     }
 
     /**
@@ -134,6 +158,9 @@ class GroupsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = crypt_decrypt($id);
+        GroupMembers::where('group_id',$id)->delete();
+        Groups::where('id',$id)->delete();
+        return 'deleted';
     }
 }
