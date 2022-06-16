@@ -96,6 +96,12 @@
                 <span>Staff</span> </a>
         </li>
 
+        <li>
+            <a href="{{url('admin/clusters')}}">
+                <i class=" ri-shield-user-line"></i>
+                <span>Clusters</span> </a>
+        </li>
+
         <li class="menu-title  mt-2">settings</li>
         <li>
             <a href="{{ route('categories.index') }}">

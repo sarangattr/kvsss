@@ -13,5 +13,6 @@
     "User": true,
     "SetTopBox": true,
     "Items": true,
-    "Dashboard": true
+    "Dashboard": true,
+    "Groups": true
 }
