@@ -37,8 +37,9 @@ class ItemsController extends Controller
                 'none';
             })
             ->editColumn('model_no', function ($result) {
-                $model = Models::where('id',$result -> model_no)->select('name')->first()->name;
-                return $model;
+                // $model = Models::where('id',$result -> model_no)->select('name')->first()->name;
+                // return $model;
+                return $result -> model_no;
             })
             ->editColumn('actions', function ($result) {
                 return DataTableHelpers::newActions($result->id, 'items', ['hide-show']); 
