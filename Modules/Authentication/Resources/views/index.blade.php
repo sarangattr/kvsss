@@ -19,7 +19,7 @@
         </div>
          @error('password')<div class="text-danger">{{ $message }}</div>@enderror
     </div>
-    <div class="mb-3">
+    <div class="">
         <div class="form-check">
             <!-- <input class="form-check-input" type="checkbox" name="remember" id="checkbox-signin" checked>
             <label class="form-check-label" for="checkbox-signin">

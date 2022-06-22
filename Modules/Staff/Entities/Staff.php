@@ -17,11 +17,12 @@ class Staff extends Model
 
     protected $fillable = [
         'name',
-        'email',
+        // 'email',
         'mobile',
         'password',
         'user_type',
         'status',
+        'lco_code',
         'del_status'
     ];
 

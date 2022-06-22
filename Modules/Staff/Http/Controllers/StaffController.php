@@ -29,7 +29,7 @@ class StaffController extends Controller
     public function datatable(Request $request)
     {
         $query = Staff::query();
-        $result = $query->select('id','lco_code','user_type','status','date_of_join','name','email','mobile')
+        $result = $query->select('id','lco_code','user_type','status','date_of_join','name','mobile')
             ->where('staffs.del_status',0)
             ->orderby('id','ASC')
             ->take($request->length);
@@ -39,9 +39,9 @@ class StaffController extends Controller
             ->editColumn('name', function ($result) {
                 return ucFirst($result->name);
             })
-            ->editColumn('email', function ($result) {
-                return $result->email;
-            })
+            // ->editColumn('email', function ($result) {
+            //     return $result->email;
+            // })
             ->editColumn('staff_id', function ($result) {
                 return $result->lco_code;
             })
@@ -85,7 +85,7 @@ class StaffController extends Controller
     {
         $staff = new Staff();
         $staff -> name = $request -> name;
-        $staff -> email = $request -> email;
+        // $staff -> email = $request -> email;
         $staff -> mobile = $request -> mobile;
         $staff -> lco_code = $request -> lco_code;
         $staff -> user_type = $request -> user_type;
@@ -116,7 +116,7 @@ class StaffController extends Controller
     public function edit($id)
     {
         $result = Staff::where('id',crypt_decrypt($id))
-            ->select('name','email','mobile','user_type','lco_code','date_of_join')
+            ->select('name','mobile','user_type','lco_code','date_of_join')
             ->first();
 
         // $usertype = Role::where('id','!=',1)->pluck('name','id')->toArray();
@@ -138,7 +138,7 @@ class StaffController extends Controller
         $staff = Staff::where('id',$id)
             ->update([
                 'name' => $request -> name,
-                'email' => $request -> email,
+                // 'email' => $request -> email,
                 'mobile' => $request -> mobile,
                 'lco_code' => $request -> lco_code ,
                 'date_of_join' => $request -> date_of_join,
