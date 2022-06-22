@@ -1,5 +1,5 @@
 @extends('application::layouts.master')
-
+@section('title', 'Reset Password')
 @section('content')
 
 <!-- start page title -->

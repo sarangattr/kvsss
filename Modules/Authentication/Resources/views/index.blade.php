@@ -21,10 +21,10 @@
     </div>
     <div class="mb-3">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="checkbox-signin" checked>
+            <!-- <input class="form-check-input" type="checkbox" name="remember" id="checkbox-signin" checked>
             <label class="form-check-label" for="checkbox-signin">
                 Remember me
-            </label>
+            </label> -->
         </div>
     </div>
     <div class="d-grid mb-0 text-center">

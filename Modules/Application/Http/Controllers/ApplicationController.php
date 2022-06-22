@@ -147,12 +147,18 @@ class ApplicationController extends Controller
             'email' => ['required','max:200','email',Rule::unique('users')->ignore(authUserId(), "id")],
             'old_password' => ['required',function ($attribute,  $pass, $fail) use ($user) {
                 if (!Hash::check($pass, $user->password)) {
-                    $fail('Your password was not updated, since the provided current password does not match old password.');
+                    $fail('Provided current password does not match old password.');
                 }
             }],
-            'password' => ['required','min:6','string','different:old_password'],
+            'password' => ['required','min:6','string','different:old_password','required_with:password_confirmation','confirmed'],
             'password_confirmation' => ['required','same:password'],
         ]);
-        return $request;
+        $user = User::where('id',authUserId())
+            ->update([
+                'email' => $request -> email,
+                'password' => Hash::make($request -> password),
+            ]);
+        flash(trans('application::actions.password-update'))->success();
+        return redirect('/admin/reset-old-password');
     }
 }
