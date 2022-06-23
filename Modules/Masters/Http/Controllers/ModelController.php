@@ -24,11 +24,17 @@ class ModelController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Models::query();
-        $result = $query->select('id','name','model_id','brand_id','status')
+        // $query = Models::query();
+        // $result = $query->select('id','name','model_id','brand_id','status')
+        //     ->where('del_status',0)
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Models::select('id','name','model_id','brand_id','status', \DB::raw('@row := @row + 1 AS rownum'))
             ->where('del_status',0)
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
            ->addIndexColumn()
