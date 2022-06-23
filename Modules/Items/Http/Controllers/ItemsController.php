@@ -54,7 +54,7 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        $models = Models::where('status',1)->pluck('name','id')->toArray();
+        $models = Models::where('status',1)->pluck('name','name')->toArray();
         return view('items::items.create',compact('models'));
     }
 
@@ -65,7 +65,7 @@ class ItemsController extends Controller
      */
     public function store(ItemsRequest $request)
     {
-        //return $request;
+        // return $request;
         $item = Items::create($request->all());
 
         flash(trans('application::actions.create-success'))->success();
@@ -89,7 +89,7 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        $models = Models::where('status',1)->pluck('name','id')->toArray();
+        $models = Models::where('status',1)->pluck('name','name')->toArray();
         $result = Items::where('id',crypt_decrypt($id))->select('use','number','location_no','model_no','komment')->first();
 
         return view('items::items.edit',compact('id','result','models'));
