@@ -31,7 +31,7 @@ class SetTopBoxController extends Controller
         $result = SetTopBox::select('id','lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status','activ_date','deact_date','react_date','create_date','subdistributor_code', \DB::raw('@row := @row + 1 AS rownum'))
             ->where('del_status',0)
             ->orderby('id','ASC')
-            ->get();
+            ->take($request->length);
         // $query = SetTopBox::query();
         // $result = $query->select('id','lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status','activ_date','deact_date','react_date','create_date','subdistributor_code')
         //     ->where('del_status',0)
@@ -39,7 +39,6 @@ class SetTopBoxController extends Controller
         //     ->take($request->length);
         
         return DataTables::of($result)
-        ->addIndexColumn()
             ->editColumn('status', function ($result) {
                 return DataTableHelpers::statusChangerSTB( crypt_encrypt($result -> id), $result -> status, '/admin/change-set-top-box-status' );
             })
