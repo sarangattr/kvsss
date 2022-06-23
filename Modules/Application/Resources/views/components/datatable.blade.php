@@ -113,14 +113,21 @@
                 iDisplayLength: 10,
                 serverSide: true,
                 processing: true,
-                pageLength: 25,
-                autoWidth       : true,
-                responsive      : true,
-                paging          : true,
-                "language": { 
-                    "processing": "Please wait..."
+                keys: !0,
+                select: {
+                    style: "multi"
                 },
-                "order": [[0, "DESC"]],
+                language: {
+                    processing: "Please wait....",
+                    paginate: {
+                        previous: "<i class='fas fa-angle-left'>",
+                        next: "<i class='fas fa-angle-right'>"
+                    }
+                },
+                "order": [
+                    [0, "DESC"]
+                ],
+                responsive      : true,
                 ajax: {
                     url: "{{$url}}",
                     dataType: "json",
