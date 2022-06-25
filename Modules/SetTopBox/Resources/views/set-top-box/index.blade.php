@@ -29,6 +29,7 @@
         ],       
         'url' => url('/admin/set-top-box/datatable'),
         'headers' => [
+            ['label' => 'ID', 'width' => '50px', 'name' => 'DT_RowIndex', 'orderable' => false ,'searchable' => false ],
             ['label' => 'LCO ID', 'name' => 'lco_id'],     
             ['label' => 'Serial No.', 'name' => 'serial_no'],
             ['label' => 'VC No.', 'name' => 'vc_no'],

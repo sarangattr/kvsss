@@ -40,7 +40,7 @@ class StaffRequest extends FormRequest
         return
             [
                 'name' => 'required|max:100|min:2',
-                'email' => ['required','max:200','email',Rule::unique('staffs')->ignore($id, "id")],
+                // 'email' => ['required','max:200','email',Rule::unique('staffs')->ignore($id, "id")],
                 'password' => 'required|min:6',
                 'mobile' => ['required','digits:10',Rule::unique('staffs')->ignore($id, "id")],
                 'lco_code' => ['required','max:100',Rule::unique('staffs')->ignore($id, "id")],

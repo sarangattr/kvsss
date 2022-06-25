@@ -39,6 +39,7 @@ class SetTopBoxController extends Controller
         //     ->take($request->length);
         
         return DataTables::of($result)
+            ->addIndexColumn()
             ->editColumn('status', function ($result) {
                 return DataTableHelpers::statusChangerSTB( crypt_encrypt($result -> id), $result -> status, '/admin/change-set-top-box-status' );
             })
