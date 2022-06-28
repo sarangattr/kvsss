@@ -50,15 +50,15 @@ class CreateComplaintsTable extends Migration
             $table->unsignedBigInteger('sup_to_checkout_id')->nullable();
             $table->unsignedBigInteger('sup_to_checkout_tray_id')->nullable();
 
-            $table->timestamp('sup_to_stockist_time')->nullable();
-            $table->string('sup_to_stockist_status',1)->default('N');
-            $table->unsignedBigInteger('sup_to_stockist_id')->nullable();
-            $table->unsignedBigInteger('sup_to_stockist_tray_id')->nullable();
+            // $table->timestamp('sup_to_stockist_time')->nullable();
+            // $table->string('sup_to_stockist_status',1)->default('N');
+            // $table->unsignedBigInteger('sup_to_stockist_id')->nullable();
+            // $table->unsignedBigInteger('sup_to_stockist_tray_id')->nullable();
 
-            $table->timestamp('stockist_to_checkout_time')->nullable();
-            $table->string('stockist_to_checkout_status',1)->default('N');
-            $table->unsignedBigInteger('stockist_to_checkout_id')->nullable();
-            $table->unsignedBigInteger('stockist_to_checkout_tray_id')->nullable();
+            // $table->timestamp('stockist_to_checkout_time')->nullable();
+            // $table->string('stockist_to_checkout_status',1)->default('N');
+            // $table->unsignedBigInteger('stockist_to_checkout_id')->nullable();
+            // $table->unsignedBigInteger('stockist_to_checkout_tray_id')->nullable();
 
             $table->timestamp('checkout_to_sub_time')->nullable();
             $table->string('checkout_to_sub_status',1)->default('N');
