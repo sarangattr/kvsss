@@ -42,9 +42,9 @@ class StaffController extends Controller
             // ->editColumn('email', function ($result) {
             //     return $result->email;
             // })
-            ->editColumn('staff_id', function ($result) {
-                return $result->lco_code;
-            })
+            // ->editColumn('staff_id', function ($result) {
+            //     return $result->lco_code;
+            // })
             ->editColumn('mobile', function ($result) {
                 return ucFirst($result->mobile);
             })

@@ -30,8 +30,8 @@
         'url' => url('/admin/staffs/datatable'),
         'headers' => [
             ['label' => 'ID', 'width' => '50px', 'name' => 'id', 'orderable' => false ],
-            ['label' => 'Name', 'name' => 'name' , 'orderable' => false, 'searchable' => false],     
-            ['label' => 'Staff Id', 'name' => 'staff_id'],
+            ['label' => 'Name', 'name' => 'name'],     
+            ['label' => 'Staff Id', 'name' => 'lco_code'],
             
             ['label' => 'Phone', 'name' => 'mobile', 'orderable' => false, 'searchable' => false], 
             ['label' => 'User Type', 'name' => 'role', 'orderable' => false, 'searchable' => false],
