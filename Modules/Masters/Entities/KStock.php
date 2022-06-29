@@ -13,7 +13,7 @@ class KStock extends Model
         'item_id',
         'owner_id',
         'quantity',
-        'status'
+        'complaint_quantity'
     ];
 
     protected $table = 'k_stocks';

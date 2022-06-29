@@ -18,7 +18,7 @@ class CreateKStocksTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('quantity');
-            $table->boolean('status')->default(0);
+            $table->unsignedBigInteger('complaint_quantity');
             $table->timestamps();
         });
     }
