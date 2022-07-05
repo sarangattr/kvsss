@@ -27,17 +27,46 @@ class Complaints extends Model
         'lco_to_sub_status',
         'sub_to_checkin_time',
         'sub_to_checkin_status',
+
+        'sub_to_checkin_id',
+
         'checkin_to_tech_time',
         'checkin_to_tech_status',
         'checkin_to_tech_id',
         'checkin_to_tech_tray',
+
         'tech_to_sup_time',
         'tech_to_sup_status',
+        'tech_to_sup_tray_id',
+
         'actual_complaint',
         'flashed',
         'status',
+
+        'sup_to_qc_time',
+        'sup_to_qc_status',
+        'sup_to_qc_tray',
+
+        'tech_to_checkout_time',
+        'tech_to_checkout_status',
+        'tech_to_checkout_tray_id',
+        'tech_to_checkout_id',
+
         'sup_to_checkout_time',
         'sup_to_checkout_status',
+        'sup_to_checkout_tray_id',
+        'sup_to_checkout_id',
+
+        // 'sup_to_stockist_time',
+        // 'sup_to_stockist_status',
+        // 'sup_to_stockist_id',
+        // 'sup_to_stockist_tray_id',
+
+        // 'stockist_to_checkout_time',
+        // 'stockist_to_checkout_status',
+        // 'stockist_to_checkout_id',
+        // 'stockist_to_checkout_tray_id',
+
         'checkout_to_sub_time',
         'checkout_to_sub_status',
         'sub_to_lco_time',
@@ -48,7 +77,8 @@ class Complaints extends Model
         'stb_status_enb',
         'stb_del_status',
         'history_trans',
-        'history_trans_status'
+        'history_trans_status',
+        
     ];
 
     protected $table = 'complaints';

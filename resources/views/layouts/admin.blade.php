@@ -58,7 +58,7 @@
                             aria-expanded="false">
                             <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ms-1">
-                                Nik Patel <i class="mdi mdi-chevron-down"></i>
+                                {{authUserName()}} <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">

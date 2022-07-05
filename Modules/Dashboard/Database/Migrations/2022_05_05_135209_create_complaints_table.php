@@ -44,6 +44,7 @@ class CreateComplaintsTable extends Migration
 
             $table->timestamp('sup_to_qc_time')->nullable();
             $table->string('sup_to_qc_status',1)->default('N');
+            $table->unsignedBigInteger('sup_to_qc_tray')->nullable();
 
             $table->timestamp('sup_to_checkout_time')->nullable();
             $table->string('sup_to_checkout_status',1)->default('N');
