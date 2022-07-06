@@ -32,7 +32,6 @@
             ['label' => 'ID', 'width' => '50px', 'name' => 'id', 'orderable' => false ],
             ['label' => 'Name', 'name' => 'name'],     
             ['label' => 'Staff Id', 'name' => 'lco_code'],
-            
             ['label' => 'Phone', 'name' => 'mobile', 'orderable' => false, 'searchable' => false], 
             ['label' => 'User Type', 'name' => 'role', 'orderable' => false, 'searchable' => false],
             ['label' => 'Date of Join', 'name' => 'date_of_join', 'orderable' => false, 'searchable' => false],           
