@@ -23,11 +23,17 @@ class TagsController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Tags::query();
-        $result = $query->select('id','tag','description','status')
+        // $query = Tags::query();
+        // $result = $query->select('id','tag','description','status')
+        //     ->where('del_status',0)
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Tags::select('id','tag','description','status', \DB::raw('@row := @row + 1 AS rownum'))
             ->where('del_status',0)
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
            ->addIndexColumn()

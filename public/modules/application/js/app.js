@@ -27,6 +27,11 @@ $(document).on('click','.change-active-inactive-status',function(){
     .then(response => {
         if (response.status === true) {
             appNotification('success',response.message);
+            console.log($(this).closest('table').attr('id'));
+
+            if ($(this).closest('table').attr('id') == 'staff-table-re'){
+                location.reload();
+            }
             resetDataTable('#' + $(this).closest('table').attr('id'), $(this).data('type'));
         }
     })

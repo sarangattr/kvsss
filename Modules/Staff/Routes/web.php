@@ -14,7 +14,7 @@
 Route::prefix('admin')->group(function() {
     Route::group(['middleware' => ['auth']], function () {
         Route::resource('staffs', 'StaffController');
-        Route::post('staffs/datatable', 'StaffController@datatable');
+        Route::post('staffs/datatable', 'StaffController@datatable')->name('staffs.datatable');
         Route::get('change-staff-status', 'StaffController@changeStatus');
     });
 });

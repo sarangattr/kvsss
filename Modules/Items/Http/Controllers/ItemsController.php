@@ -24,10 +24,15 @@ class ItemsController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Items::query();
-        $result = $query->select('id','use','number','model_no','location_no')
+        // $query = Items::query();
+        // $result = $query->select('id','use','number','model_no','location_no')
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Items::select('id','use','number','model_no','location_no', \DB::raw('@row := @row + 1 AS rownum'))
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
             ->addIndexColumn()

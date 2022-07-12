@@ -24,13 +24,21 @@ class StoreController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Store::query();
-        $result = $query->select('stores.name','stores.id','stores.status')
+        // $query = Store::query();
+        // $result = $query->select('stores.name','stores.id','stores.status')
+        //     ->join('staffs','stores.store_owner','=','staffs.id')
+        //     ->addSelect('staffs.lco_code','staffs.name as lco_name')
+        //     ->where('stores.del_status',0)
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Store::select('stores.name','stores.id','stores.status', \DB::raw('@row := @row + 1 AS rownum'))
             ->join('staffs','stores.store_owner','=','staffs.id')
             ->addSelect('staffs.lco_code','staffs.name as lco_name')
             ->where('stores.del_status',0)
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
            ->addIndexColumn()

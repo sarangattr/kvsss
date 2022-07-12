@@ -19,7 +19,7 @@
                         <a href="{{route('categories.index')}}" class="{{$title=='Category' ? $activeClass : ''}}" style="{{ $title=='Category' ? $activeStyle : '' }}">Categories</a>
                         <hr style="margin: 0;">
                         <a href="{{route('brands.index')}}" class="{{$title=='Brand' ? $activeClass : ''}}" style="{{$title=='Brand' ? $activeStyle : ''}}">Brands</a>
-                        <hr style="margin: 0;">
+                        <hr style="margin: -1px;;">
                         <a href="{{route('tags.index')}}" class="{{$title=='Tag' ? $activeClass : ''}}" style="{{$title=='Tag' ? $activeStyle : ''}}">Tags</a>
                         <hr style="margin: 0;">
                         <a href="{{route('models.index')}}" class="{{$title=='Model' ? $activeClass : ''}}" style="{{$title=='Model' ? $activeStyle : ''}}">Model</a>

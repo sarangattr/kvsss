@@ -20,9 +20,35 @@ class SetTopBoxController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('settopbox::set-top-box.index');
+        $draw = $request->get('draw');
+        $start = $request->get('start');
+        if ($request->get('length')) { $length = $request->get('length');}else{ $length = 25;};
+        $search_arr = $request->get('search'); 
+        
+        $records = SetTopBox::where('del_status',0)
+            ->where(function($query) use($search_arr){
+                $query -> where('serial_no', 'like', '%' .$search_arr . '%')
+                    ->orWhere('lco_id', 'like', '%' .$search_arr . '%')
+                    ->orWhere('vc_no', 'like', '%' .$search_arr . '%');
+            })
+            ->select('id','lco_id','serial_no','vc_no','model','cas','stb_type','supplier','batch','assign_date','status','activ_date','deact_date','react_date','create_date','subdistributor_code') 
+            ->skip($start) 
+            ->paginate($length); 
+        
+        foreach($records as $rec)
+        {
+            $rec -> status = DataTableHelpers::statusChangerSTB( crypt_encrypt($rec -> id), $rec -> status, '/admin/change-set-top-box-status' );
+            $rec ['actions'] = DataTableHelpers::newActions($rec->id, 'set-top-box', ['hide-show']); 
+        }
+
+        $data = array(
+            'draw' => $draw,
+            'data' => $records,
+        );
+
+        return view('settopbox::set-top-box.index2',compact('data'));
     }
 
     public function datatable(Request $request)

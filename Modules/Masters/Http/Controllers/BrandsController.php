@@ -23,11 +23,17 @@ class BrandsController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Brands::query();
-        $result = $query->select('id','name','description','status')
+        // $query = Brands::query();
+        // $result = $query->select('id','name','description','status')
+        //     ->where('del_status',0)
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Brands::select('id','name','description','status', \DB::raw('@row := @row + 1 AS rownum'))
             ->where('del_status',0)
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
            ->addIndexColumn()

@@ -24,13 +24,21 @@ class TrayController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Tray::query();
-        $result = $query->select('trays.name','trays.id','trays.status')
+        // $query = Tray::query();
+        // $result = $query->select('trays.name','trays.id','trays.status')
+        //     ->join('staffs','trays.tray_owner','=','staffs.id')
+        //     ->addSelect('staffs.lco_code','staffs.name as lco_name')
+        //     ->where('trays.del_status',0)
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Tray::select('trays.name','trays.id','trays.status', \DB::raw('@row := @row + 1 AS rownum'))
             ->join('staffs','trays.tray_owner','=','staffs.id')
             ->addSelect('staffs.lco_code','staffs.name as lco_name')
             ->where('trays.del_status',0)
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
            ->addIndexColumn()

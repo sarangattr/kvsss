@@ -23,13 +23,19 @@ class CategoryController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Category::query();
-        $categories = $query->select('id','name','description','parent_category','status')
+        // $query = Category::query();
+        // $categories = $query->select('id','name','description','parent_category','status')
+        //     ->where('del_status',0)
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Category::select('id','name','description','parent_category','status', \DB::raw('@row := @row + 1 AS rownum'))
             ->where('del_status',0)
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
-        return DataTables::of($categories)
+        return DataTables::of($result)
            ->addIndexColumn()
             ->editColumn('name', function ($result) {
                 return ucFirst($result->name);

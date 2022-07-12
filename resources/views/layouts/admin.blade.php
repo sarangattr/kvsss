@@ -56,7 +56,7 @@
                         <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                             data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                             aria-expanded="false">
-                            <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
+                            <img src="{{asset('assets/images/users/no-dp.jpg')}}" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ms-1">
                                 {{authUserName()}} <i class="mdi mdi-chevron-down"></i>
                             </span>

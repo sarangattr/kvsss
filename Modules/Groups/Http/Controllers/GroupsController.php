@@ -21,10 +21,16 @@ class GroupsController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Groups::query();
-        $result = $query->select('id','name','lead_id')
+        // $query = Groups::query();
+        // $result = $query->select('id','name','lead_id')
+        //     ->orderby('id','ASC')
+        //     ->take($request->length);
+
+        
+        \DB::statement(\DB::raw('set @row=0'));
+        $result = Groups::select('id','name','lead_id', \DB::raw('@row := @row + 1 AS rownum'))
             ->orderby('id','ASC')
-            ->take($request->length);
+            ->get();
         
         return DataTables::of($result)
             ->editColumn('lead_id', function ($result) {
