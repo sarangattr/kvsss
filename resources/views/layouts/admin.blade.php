@@ -74,16 +74,16 @@
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="ri-settings-3-line"></i>
                                 <span>Settings</span>
-                            </a>
+                            </a> -->
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="ri-wallet-line"></i>
                                 <span>My Wallet <span class="badge bg-success float-end">3</span> </span>
-                            </a>
+                            </a> -->
 
                             <!-- item-->
                             <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
