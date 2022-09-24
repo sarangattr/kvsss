@@ -38,7 +38,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-9">
-                        <a href="{{url('/admin/staffs/create')}}" id="staff-table" class="btn btn-danger mb-2"> <i class="fa fa-plus"></i> New Staff</a>
+                        <a href="{{url('/admin/set-top-box/create')}}" id="staff-table" class="btn btn-danger mb-2"> <i class="fa fa-plus"></i> New SetTopBox</a>
                     </div>
                     <div class="col-md-3 text-end">
                         <form action="" type="GET"> 

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 function appConfig($config)
 {
     $con = [
-        'logo' => url('assets/images/logo-light.png'),
+        'logo' => url('assets/images/kerala-vision-logo.png'),
         'appName' => env('APP_NAME', 'APP')
     ];
 
